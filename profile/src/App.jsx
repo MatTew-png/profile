@@ -229,30 +229,36 @@ function App() {
 
           <div className="roadmap">
             <div className="roadmap-item left scroll-animate">
-              <div className="roadmap-content glass-panel" style={{ padding: '24px' }}>
-                <span className="font-label-mono roadmap-date">Current</span>
-                <h3 className="font-body-lg" style={{ color: 'var(--on-surface)', fontWeight: 'bold' }}>Exploring Opportunities</h3>
-                <p className="font-body-md" style={{ color: 'var(--on-surface-variant)', marginTop: '8px' }}>
+              <div className="roadmap-dot"></div>
+              <div className="roadmap-date-opposite font-label-mono">CURRENT</div>
+              <div className="roadmap-content glass-panel">
+                <span className="font-label-mono roadmap-date-mobile">CURRENT</span>
+                <h3 className="font-body-lg">Exploring Opportunities</h3>
+                <p className="font-body-md">
                   Available to start immediately and ready for Hybrid Work. Exploring opportunities in IT and freelance roles.
                 </p>
               </div>
             </div>
 
             <div className="roadmap-item right scroll-animate delay-100">
-              <div className="roadmap-content glass-panel" style={{ padding: '24px' }}>
-                <span className="font-label-mono roadmap-date">Expected Apr 2026</span>
-                <h3 className="font-body-lg" style={{ color: 'var(--on-surface)', fontWeight: 'bold' }}>B.Sc. in Computer Science</h3>
-                <p className="font-body-md" style={{ color: 'var(--on-surface-variant)', marginTop: '8px' }}>
+              <div className="roadmap-dot"></div>
+              <div className="roadmap-date-opposite font-label-mono">EXPECTED APR 2026</div>
+              <div className="roadmap-content glass-panel">
+                <span className="font-label-mono roadmap-date-mobile">EXPECTED APR 2026</span>
+                <h3 className="font-body-lg">B.Sc. in Computer Science</h3>
+                <p className="font-body-md">
                   Burapha University. Building a strong foundation in software engineering, algorithms, and full-stack development.
                 </p>
               </div>
             </div>
 
             <div className="roadmap-item left scroll-animate delay-200">
-              <div className="roadmap-content glass-panel" style={{ padding: '24px' }}>
-                <span className="font-label-mono roadmap-date">Academic Experience</span>
-                <h3 className="font-body-lg" style={{ color: 'var(--on-surface)', fontWeight: 'bold' }}>Teaching Assistant</h3>
-                <p className="font-body-md" style={{ color: 'var(--on-surface-variant)', marginTop: '8px' }}>
+              <div className="roadmap-dot"></div>
+              <div className="roadmap-date-opposite font-label-mono">ACADEMIC EXPERIENCE</div>
+              <div className="roadmap-content glass-panel">
+                <span className="font-label-mono roadmap-date-mobile">ACADEMIC EXPERIENCE</span>
+                <h3 className="font-body-lg">Teaching Assistant</h3>
+                <p className="font-body-md">
                   Experienced as a Teaching Assistant for courses including Exploratory Data Analysis and Relational Database. Mentored students and assisted in practical labs.
                 </p>
               </div>
