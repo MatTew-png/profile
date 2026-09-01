@@ -58,47 +58,60 @@ export const projects = [
   },
   {
     id: 'patient-movement',
-    title: 'Patient Movement Monitoring System',
-    subtitle: 'Real-time Telemetry & Health Monitoring Backend',
-    role: 'Backend Developer & API Specialist',
+    title: 'Patient Movement & Telemetry Monitoring System',
+    subtitle: 'Real-Time IoT Health Telemetry & LLM AI Clinical Assistant',
+    role: 'Full-Stack Developer & Real-Time API Architect',
     category: 'Backend / IoT',
     badge: 'HealthTech & Real-Time',
-    bannerImage: null,
+    bannerImage: '/projects/patient-monitoring.png',
     previewType: 'iot',
-    tech: ['FastAPI', 'WebSocket', 'MySQL', 'Python', 'Postman', 'Swagger UI'],
+    tech: ['FastAPI', 'WebSockets', 'Vue 3', 'Tailwind CSS', 'SQLAlchemy', 'MySQL', 'LLM AI Ask', 'Pinia'],
     description:
-      'Engineered a high-throughput, low-latency backend system to track patient movement sensors in healthcare facilities, delivering instantaneous fall detection alerts over persistent WebSockets.',
+      'An enterprise healthcare telemetry platform monitoring live room sensor streams, broadcasting sub-35ms emergency alerts to nurse stations over WebSockets, and featuring an integrated LLM AI clinical assistant for patient history inquiries.',
     authorOwnership: [
-      'Constructed asynchronous REST endpoints with FastAPI capable of ingesting high-frequency sensor telemetry.',
-      'Designed real-time bi-directional WebSocket channels for instant nurse-station alert broadcast (<35ms latency).',
-      'Authored automated Postman API contract testing collections covering payload validation and security constraints.'
+      'Constructed live telemetry graphs (BedSensorGraph, SleepTimelineGraph) plotting continuous patient vital & movement streams.',
+      'Engineered nurse emergency alert system with immediate visual/sound dispatch and bulk triage (Accept All / Success All).',
+      'Integrated LLM AI Clinical Assistant service (AiAsk) enabling natural language inquiries on patient historical data.',
+      'Constructed asynchronous FastAPI endpoints for high-throughput sensor telemetry ingestion and bed mapping.'
     ],
     highlights: [
       'Engineered asynchronous REST APIs with FastAPI capable of ingesting high-frequency sensor telemetry.',
-      'Designed real-time bi-directional WebSocket channels for instant nurse-station alert broadcast.',
-      'Constructed complete Postman API automation test collections covering contract schemas and edge cases.',
-      'Integrated auto-generated interactive API documentation with Swagger UI / OpenAPI specification.'
+      'Designed real-time bi-directional WebSocket channels for instant nurse-station alert broadcast (<35ms latency).',
+      'Integrated natural language LLM Clinical AI assistant for real-time patient inquiry and summaries.',
+      'Completed comprehensive SDLC documentation: C4 Architecture Model, ERD, Class Diagram, and UAT test plan.'
     ],
     testMetrics: {
-      tool: 'Postman & Pytest',
-      coverage: '95% API Endpoints',
-      testType: 'Integration & Contract Testing',
-      suiteCount: '24 Automated Tests'
+      tool: 'Postman & UAT Script',
+      coverage: '100% Core Requirements',
+      testType: 'API Contract & UAT Verification',
+      suiteCount: 'Full SDLC & UAT Suite'
     },
     screenshots: [
       {
-        title: 'Live Telemetry Stream',
-        tag: 'WebSocket Stream',
-        desc: 'Continuous real-time patient movement stream with automatic fall threshold detection and sub-35ms nurse dispatch.'
+        title: 'Live Telemetry & Vital Graphs',
+        tag: 'Telemetry Graph',
+        desc: 'Continuous real-time patient vital sign streaming (Heart Rate, SpO2, Respiration) with sleep timeline charts and date filtering.'
       },
       {
-        title: 'OpenAPI & Swagger Documentation',
-        tag: 'API Contracts',
-        desc: 'Interactive REST API documentation with automated Pydantic schema validation for patient vital data.'
+        title: 'Nurse Station Emergency Alert Hub',
+        tag: 'Nurse Alerts',
+        desc: 'Real-time WebSocket emergency alert dispatch with audio/visual warnings, patient location tag, and Accept All / Resolve triage buttons.'
+      },
+      {
+        title: 'LLM AI Clinical Assistant (AiAsk)',
+        tag: 'AI Assistant',
+        desc: 'Embedded AI assistant enabling natural language condition queries, vital summary lookups, and patient history retrieval.'
+      },
+      {
+        title: 'Bed & Multi-Ward Hierarchy',
+        tag: 'Ward ERP',
+        desc: 'Building to Ward to Bed management interface with dynamic physical sensor assignment.'
       }
     ],
-    githubUrl: 'https://github.com/MatTew-png',
-    liveUrl: '#',
+    githubUrl: 'https://github.com/MatTew-png/patient-monitoring-system',
+    liveUrl: 'https://github.com/MatTew-png/patient-monitoring-system',
+    figmaUrl: 'https://www.figma.com/design/B3oC8CcWBpeUV0S0GJKWm0/Ui-%E0%B8%A3%E0%B8%B0%E0%B8%9A%E0%B8%9A%E0%B8%95%E0%B8%B4%E0%B8%94%E0%B8%95%E0%B8%B2%E0%B8%A1%E0%B8%9C%E0%B8%B9%E0%B9%89%E0%B8%9B%E0%B9%88%E0%B8%A7%E0%B8%A2%E0%B8%9C%E0%B9%88%E0%B8%B2%E0%B8%99%E0%B9%80%E0%B8%8B%E0%B8%99%E0%B9%80%E0%B8%8B%E0%B8%AD%E0%B8%A3%E0%B9%8C%E0%B9%83%E0%B8%99%E0%B8%AB%E0%B9%89%E0%B8%AD%E0%B8%87%E0%B8%9C%E0%B8%B9%E0%B9%89%E0%B8%9B%E0%B9%88%E0%B8%A7%E0%B8%A2?node-id=197-650&p=f&t=htmq72h5vSGGPuFM-0',
+    presentationUrl: 'https://www.canva.com/design/DAGeO_aA0cs/pS2S3Azgz4snI0YbM099cw/edit',
     accentColor: '#38bdf8'
   },
   {
