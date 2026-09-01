@@ -16,6 +16,8 @@ import {
 } from 'lucide-react';
 import { GithubIcon } from './BrandIcons';
 import { projects } from '../data/projects';
+import { MagneticButton } from './ui/MagneticButton';
+import { BackgroundGradient } from './ui/BackgroundGradient';
 
 export default function ProjectsSection() {
   const [activeFilter, setActiveFilter] = useState('All');
@@ -168,27 +170,31 @@ export default function ProjectsSection() {
               ))}
             </div>
 
-            {/* Action Buttons */}
+            {/* Action Buttons with Magnetic Physics */}
             <div className="project-card-actions">
-              <button
-                type="button"
-                className="btn-card-preview font-label-mono"
-                onClick={() => openPreview(project)}
-              >
-                <Eye size={15} />
-                <span>View Details & UI</span>
-              </button>
+              <MagneticButton>
+                <button
+                  type="button"
+                  className="btn-card-preview font-label-mono"
+                  onClick={() => openPreview(project)}
+                >
+                  <Eye size={15} />
+                  <span>View Details & UI</span>
+                </button>
+              </MagneticButton>
 
-              <a
-                href={project.githubUrl}
-                target="_blank"
-                rel="noopener noreferrer"
-                className="btn-card-github font-label-mono"
-              >
-                <GithubIcon size={15} />
-                <span>GitHub</span>
-                <ArrowUpRight size={14} />
-              </a>
+              <MagneticButton>
+                <a
+                  href={project.githubUrl}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="btn-card-github font-label-mono"
+                >
+                  <GithubIcon size={15} />
+                  <span>GitHub</span>
+                  <ArrowUpRight size={14} />
+                </a>
+              </MagneticButton>
             </div>
           </article>
         ))}
