@@ -44,7 +44,7 @@ export default function App() {
     }
   }, [isLightMode]);
 
-  // Bi-directional Scroll Reveal Observer (Animates on both scroll down & scroll up)
+  // Fast & Predictive Bi-directional Scroll Reveal
   useEffect(() => {
     const observer = new IntersectionObserver(
       (entries) => {
@@ -52,17 +52,17 @@ export default function App() {
           if (entry.isIntersecting) {
             entry.target.classList.add('is-visible');
           } else {
-            // When scrolled out of view, remove is-visible so it re-animates upon scrolling back
+            // Only unmount/hide when scrolled well beyond viewport boundaries (150px)
             const rect = entry.target.getBoundingClientRect();
-            if (rect.top > window.innerHeight * 0.95 || rect.bottom < 40) {
+            if (rect.top > window.innerHeight + 150 || rect.bottom < -150) {
               entry.target.classList.remove('is-visible');
             }
           }
         });
       },
       {
-        threshold: 0.08,
-        rootMargin: '0px 0px -30px 0px'
+        threshold: 0,
+        rootMargin: '120px 0px 100px 0px' // Pre-loads and triggers 120px before entering screen!
       }
     );
 
