@@ -97,22 +97,25 @@ export default function ProjectsSection() {
               project.featured ? 'is-featured' : ''
             }`}
           >
-            {/* Visual Interactive Mockup Banner */}
+            {/* Visual Real Project Screenshot Banner */}
             <div
               className="project-banner-box"
               onClick={() => openPreview(project)}
               role="button"
               tabIndex={0}
-              title="Click to view interactive UI & architecture"
+              title="Click to view full-resolution UI screenshots"
             >
-              <ProjectMockupBanner
-                type={project.previewType}
-                title={project.title}
-                accentColor={project.accentColor}
-              />
-              <div className="banner-badge font-label-mono">
-                <Eye size={13} />
-                <span>View Full UI & Details</span>
+              <div className="banner-img-wrap">
+                <img
+                  src={project.bannerImage}
+                  alt={project.title}
+                  className="banner-img"
+                  loading="lazy"
+                />
+                <div className="banner-badge font-label-mono">
+                  <Eye size={13} />
+                  <span>View Full UI & Details</span>
+                </div>
               </div>
             </div>
 
@@ -234,10 +237,10 @@ export default function ProjectsSection() {
                   </div>
 
                   <div className="showcase-preview-frame">
-                    <ProjectMockupBanner
-                      type={previewProject.previewType}
-                      title={previewProject.title}
-                      accentColor={previewProject.accentColor}
+                    <img
+                      src={previewProject.bannerImage}
+                      alt={previewProject.screenshots[activeTabIdx]?.title}
+                      className="showcase-frame-img"
                     />
                     <div className="showcase-frame-info">
                       <h4 className="frame-info-title font-body-lg">

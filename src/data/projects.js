@@ -121,7 +121,7 @@ export const projects = [
     role: 'Full-Stack Developer & QA Automation',
     category: 'Full-Stack',
     badge: 'Enterprise & E2E Tested',
-    bannerImage: null,
+    bannerImage: '/projects/complaint-system.png',
     previewType: 'complaint',
     tech: ['Laravel', 'Vue.js', 'Cypress', 'PHP', 'MySQL', 'REST API'],
     description:

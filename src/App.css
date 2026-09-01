@@ -1064,6 +1064,26 @@ body.light-theme .terminal-widget {
   box-shadow: 0 8px 24px rgba(0, 0, 0, 0.5);
 }
 
+.banner-img-wrap {
+  width: 100%;
+  height: 200px;
+  position: relative;
+  overflow: hidden;
+  background: #090e18;
+}
+
+.banner-img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  object-position: top center;
+  transition: transform 0.4s ease;
+}
+
+.project-banner-box:hover .banner-img {
+  transform: scale(1.04);
+}
+
 .banner-badge {
   position: absolute;
   bottom: 8px;
