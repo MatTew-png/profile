@@ -53,28 +53,28 @@ export const projects = [
   },
   {
     id: 'coffee-shop-pos',
-    title: 'Coffee Shop POS System',
-    subtitle: 'Modular Multi-Branch Point-of-Sale & Inventory',
-    role: 'Full-Stack Developer & Automated Tester',
+    title: 'MonkKato Coffee POS & ERP System',
+    subtitle: 'Modular Multi-Branch Point-of-Sale & Inventory Management',
+    role: 'Full-Stack Developer & Software Architect',
     category: 'Full-Stack',
-    badge: 'Microservices & Clean Code',
-    tech: ['Nest.js', 'Vue.js', 'TypeScript', 'Cypress', 'PostgreSQL', 'Docker'],
+    badge: 'Enterprise POS & Inventory',
+    tech: ['NestJS', 'Vue 3', 'Pinia', 'TypeORM', 'TypeScript', 'SQLite'],
     description:
-      'Engineered a resilient Point-of-Sale platform managing high-velocity ordering, cashier shift accounting, and automated real-time inventory deductions.',
+      'Engineered an enterprise Point-of-Sale and ERP platform managing high-velocity cafe ordering, cashier shift accounting, staff attendance & payroll, and automated real-time inventory deductions.',
     highlights: [
-      'Built a structured enterprise backend using Nest.js dependency injection and clean architecture patterns.',
+      'Built a structured enterprise backend using NestJS dependency injection and TypeORM data layer.',
       'Implemented atomic database transactions to guarantee zero inventory drift during simultaneous sales.',
-      'Developed high-speed cashier checkout interface in Vue.js with responsive cart state management.',
-      'Automated UI component and integration verification using Cypress to catch regression bugs early.'
+      'Developed high-speed cashier checkout interface in Vue 3 and Pinia with responsive cart state management.',
+      'Constructed complete staff biometric attendance tracking, monthly payroll engine, and expense reporting.'
     ],
     testMetrics: {
-      tool: 'Cypress & Jest',
-      coverage: '90% Core Business Logic',
-      testType: 'Integration, Unit & E2E Smoke Tests',
-      suiteCount: '15 Test Specs'
+      tool: 'Jest & Unit Testing',
+      coverage: '92% Core Business Logic',
+      testType: 'Integration, Unit & POS Smoke Tests',
+      suiteCount: '18 Test Specs'
     },
-    githubUrl: 'https://github.com/MatTew-png',
-    liveUrl: '#',
+    githubUrl: 'https://github.com/MatTew-png/monkkato-pos',
+    liveUrl: 'https://github.com/MatTew-png/monkkato-pos',
     accentColor: '#34d399'
   }
 ];
