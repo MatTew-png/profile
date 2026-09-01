@@ -1,9 +1,5 @@
 import React, { useState, useEffect } from 'react';
 import {
-  ExternalLink,
-  CheckCircle2,
-  ShieldCheck,
-  Cpu,
   Code2,
   ArrowUpRight,
   Eye,
@@ -11,11 +7,12 @@ import {
   Sparkles,
   Layers,
   Award,
-  ChevronRight,
-  Terminal,
+  CheckCircle2,
+  ShieldCheck,
   Coffee,
   Activity,
-  FileText
+  FileText,
+  ChevronRight
 } from 'lucide-react';
 import { GithubIcon } from './BrandIcons';
 import { projects } from '../data/projects';
@@ -25,13 +22,12 @@ export default function ProjectsSection() {
   const [previewProject, setPreviewProject] = useState(null);
   const [activeTabIdx, setActiveTabIdx] = useState(0);
 
-  const filters = ['All', 'Full-Stack', 'Backend / IoT', 'Automated Testing'];
+  const filters = ['All', 'Full-Stack', 'Backend / IoT'];
 
   const filteredProjects = projects.filter((project) => {
     if (activeFilter === 'All') return true;
     if (activeFilter === 'Full-Stack') return project.category.includes('Full-Stack');
     if (activeFilter === 'Backend / IoT') return project.category.includes('Backend');
-    if (activeFilter === 'Automated Testing') return project.testMetrics !== undefined;
     return true;
   });
 
@@ -44,7 +40,6 @@ export default function ProjectsSection() {
     setPreviewProject(null);
   };
 
-  // Close preview on ESC key
   useEffect(() => {
     const handleKeyDown = (e) => {
       if (e.key === 'Escape') closePreview();
@@ -56,11 +51,11 @@ export default function ProjectsSection() {
   const getProjectIcon = (type) => {
     switch (type) {
       case 'pos':
-        return <Coffee size={20} className="text-emerald" />;
+        return <Coffee size={24} className="text-emerald" />;
       case 'iot':
-        return <Activity size={20} className="text-cyan" />;
+        return <Activity size={24} className="text-cyan" />;
       default:
-        return <FileText size={20} className="text-purple" />;
+        return <FileText size={24} className="text-purple" />;
     }
   };
 
@@ -69,11 +64,11 @@ export default function ProjectsSection() {
       <div className="section-header reveal-on-scroll">
         <div className="badge-pill">
           <Code2 size={14} className="badge-icon" />
-          <span>Real-World Engineering</span>
+          <span>Engineering Portfolio</span>
         </div>
         <h2 className="font-headline-md section-title">Featured Projects</h2>
         <p className="font-body-md section-subtitle">
-          Architected with clean design patterns, high-performance backends, and rigorous automated test coverage.
+          Real-world systems built with clean architecture, modern frameworks, and robust automated testing.
         </p>
       </div>
 
@@ -90,7 +85,7 @@ export default function ProjectsSection() {
         ))}
       </div>
 
-      {/* Projects List */}
+      {/* Projects Grid */}
       <div className="projects-grid">
         {filteredProjects.map((project, idx) => (
           <article
@@ -99,139 +94,100 @@ export default function ProjectsSection() {
               project.featured ? 'is-featured' : ''
             }`}
           >
-            {/* Visual Preview Banner */}
+            {/* Visual Image Banner */}
             <div
-              className="project-banner-wrapper"
+              className="project-banner-box"
               onClick={() => openPreview(project)}
               role="button"
               tabIndex={0}
-              title="Click to view interactive preview"
             >
               {project.bannerImage ? (
-                <div className="project-banner-image-container">
+                <div className="banner-img-wrap">
                   <img
                     src={project.bannerImage}
                     alt={project.title}
-                    className="project-banner-img"
+                    className="banner-img"
                     loading="lazy"
                   />
-                  <div className="banner-overlay">
-                    <span className="btn-preview-badge font-label-mono">
-                      <Eye size={14} />
-                      <span>Live UI Preview</span>
-                    </span>
+                  <div className="banner-badge font-label-mono">
+                    <Eye size={13} />
+                    <span>View UI & Screenshots</span>
                   </div>
                 </div>
               ) : (
-                <div className="project-banner-placeholder" style={{ background: `linear-gradient(135deg, ${project.accentColor}18, rgba(15, 23, 42, 0.9))` }}>
-                  <div className="placeholder-icon-box" style={{ borderColor: `${project.accentColor}40` }}>
+                <div
+                  className="banner-placeholder"
+                  style={{
+                    background: `linear-gradient(135deg, ${project.accentColor}15, rgba(15, 23, 42, 0.85))`
+                  }}
+                >
+                  <div className="placeholder-icon" style={{ borderColor: `${project.accentColor}30` }}>
                     {getProjectIcon(project.previewType)}
                   </div>
-                  <div className="placeholder-text">
-                    <span className="font-label-mono text-cyan">{project.category}</span>
-                    <span className="placeholder-title">{project.title}</span>
-                  </div>
-                  <span className="btn-preview-badge font-label-mono">
-                    <Eye size={14} />
-                    <span>View Architecture & UI</span>
+                  <span className="banner-badge font-label-mono">
+                    <Eye size={13} />
+                    <span>View Architecture</span>
                   </span>
                 </div>
               )}
             </div>
 
-            {/* Card Top Meta */}
-            <div className="project-top-row">
+            {/* Card Content Header */}
+            <div className="project-header-row">
               <span
-                className="project-badge"
+                className="project-badge-tag font-label-mono"
                 style={{ borderColor: project.accentColor, color: project.accentColor }}
               >
                 {project.badge}
               </span>
-              <span className="project-category font-label-mono">{project.category}</span>
+              <span className="project-role-text font-label-mono">{project.role}</span>
             </div>
 
-            {/* Title & Role */}
-            <h3 className="project-title font-headline-md">{project.title}</h3>
-            <p className="project-subtitle font-body-md">{project.subtitle}</p>
-            <p className="project-role-tag font-label-mono">
-              <Award size={13} className="text-emerald inline-icon" /> Role: {project.role}
-            </p>
+            <h3 className="project-card-title font-headline-md">{project.title}</h3>
+            <p className="project-card-desc font-body-md">{project.description}</p>
 
-            <p className="project-description font-body-md">{project.description}</p>
-
-            {/* My Engineering Ownership Highlights */}
-            {project.authorOwnership && (
-              <div className="project-ownership-box">
-                <div className="ownership-header font-label-mono">
-                  <Sparkles size={14} className="text-emerald" />
-                  <span>My Core Engineering Ownership:</span>
-                </div>
-                <ul className="ownership-list font-body-md">
-                  {project.authorOwnership.slice(0, 3).map((item, i) => (
-                    <li key={i}>
-                      <ChevronRight size={14} className="text-emerald ownership-chevron" />
-                      <span>{item}</span>
-                    </li>
-                  ))}
-                </ul>
-              </div>
-            )}
-
-            {/* Automated Testing Box */}
-            <div className="project-qa-box">
-              <div className="qa-box-header">
-                <ShieldCheck size={16} className="text-emerald" />
-                <span className="font-label-mono qa-title">Quality Assurance & Test Coverage</span>
-              </div>
-              <div className="qa-metrics-grid">
-                <div className="qa-metric-item">
-                  <span className="qa-label">Test Framework</span>
-                  <span className="qa-value">{project.testMetrics.tool}</span>
-                </div>
-                <div className="qa-metric-item">
-                  <span className="qa-label">Coverage</span>
-                  <span className="qa-value text-emerald">{project.testMetrics.coverage}</span>
-                </div>
-                <div className="qa-metric-item">
-                  <span className="qa-label">Test Scope</span>
-                  <span className="qa-value">{project.testMetrics.testType}</span>
-                </div>
-                <div className="qa-metric-item">
-                  <span className="qa-label">Automated Specs</span>
-                  <span className="qa-value text-cyan">{project.testMetrics.suiteCount}</span>
-                </div>
-              </div>
+            {/* Concise Core Contributions */}
+            <div className="project-key-points">
+              <span className="key-points-title font-label-mono">Core Highlights:</span>
+              <ul className="key-points-list">
+                {(project.authorOwnership || project.highlights).slice(0, 3).map((pt, i) => (
+                  <li key={i}>
+                    <CheckCircle2 size={15} className="point-icon text-cyan" />
+                    <span>{pt}</span>
+                  </li>
+                ))}
+              </ul>
             </div>
 
-            {/* Tech Tags */}
-            <div className="project-tags">
-              {project.tech.map((tech) => (
-                <span key={tech} className="font-label-mono project-tag">
-                  {tech}
+            {/* Tech Stack Chips */}
+            <div className="project-tech-chips">
+              {project.tech.map((t) => (
+                <span key={t} className="tech-chip font-label-mono">
+                  {t}
                 </span>
               ))}
             </div>
 
-            {/* Card Actions */}
-            <div className="project-actions">
+            {/* Action Buttons */}
+            <div className="project-card-actions">
               <button
                 type="button"
-                className="btn-action btn-preview font-label-mono"
+                className="btn-card-preview font-label-mono"
                 onClick={() => openPreview(project)}
               >
                 <Eye size={15} />
-                <span>Preview UI</span>
+                <span>View Details & UI</span>
               </button>
 
               <a
                 href={project.githubUrl}
                 target="_blank"
                 rel="noopener noreferrer"
-                className="btn-action btn-github font-label-mono"
+                className="btn-card-github font-label-mono"
               >
                 <GithubIcon size={15} />
-                <span>Source Code</span>
-                <ArrowUpRight size={13} />
+                <span>GitHub</span>
+                <ArrowUpRight size={14} />
               </a>
             </div>
           </article>
@@ -239,45 +195,48 @@ export default function ProjectsSection() {
       </div>
 
       {/* ========================================================================= */}
-      {/* Interactive Project Preview & Architecture Modal Lightbox */}
+      {/* Interactive Clean Details Modal */}
       {/* ========================================================================= */}
       {previewProject && (
-        <div className="project-modal-backdrop" onClick={closePreview}>
+        <div className="clean-modal-backdrop" onClick={closePreview}>
           <div
-            className="project-modal-card glass-panel"
+            className="clean-modal-dialog glass-panel"
             onClick={(e) => e.stopPropagation()}
             role="dialog"
             aria-modal="true"
           >
             {/* Modal Header */}
-            <div className="modal-header">
-              <div className="modal-title-group">
-                <div className="modal-badge-pill" style={{ borderColor: previewProject.accentColor, color: previewProject.accentColor }}>
+            <div className="clean-modal-header">
+              <div className="clean-modal-title-group">
+                <span
+                  className="modal-badge-chip font-label-mono"
+                  style={{ borderColor: previewProject.accentColor, color: previewProject.accentColor }}
+                >
                   {previewProject.badge}
-                </div>
-                <h3 className="modal-project-title font-headline-md">{previewProject.title}</h3>
-                <p className="modal-project-subtitle font-body-md">{previewProject.subtitle}</p>
+                </span>
+                <h3 className="modal-title font-headline-md">{previewProject.title}</h3>
+                <p className="modal-subtitle font-body-md">{previewProject.subtitle}</p>
               </div>
               <button
                 type="button"
-                className="btn-close-modal"
+                className="clean-modal-close-btn"
                 onClick={closePreview}
-                aria-label="Close preview"
+                aria-label="Close dialog"
               >
                 <X size={20} />
               </button>
             </div>
 
-            {/* Modal Interactive Content */}
-            <div className="modal-body-scroll">
+            {/* Modal Body */}
+            <div className="clean-modal-body">
               {/* Feature Showcase Tabs */}
               {previewProject.screenshots && previewProject.screenshots.length > 0 && (
-                <div className="modal-showcase-section">
-                  <div className="showcase-tabs">
+                <div className="modal-showcase-block">
+                  <div className="showcase-nav-tabs">
                     {previewProject.screenshots.map((s, idx) => (
                       <button
                         key={idx}
-                        className={`showcase-tab-btn font-label-mono ${activeTabIdx === idx ? 'active' : ''}`}
+                        className={`showcase-nav-btn font-label-mono ${activeTabIdx === idx ? 'active' : ''}`}
                         onClick={() => setActiveTabIdx(idx)}
                       >
                         <Layers size={13} />
@@ -286,24 +245,24 @@ export default function ProjectsSection() {
                     ))}
                   </div>
 
-                  <div className="showcase-display-box glass-panel">
+                  <div className="showcase-preview-frame">
                     {previewProject.bannerImage ? (
                       <img
                         src={previewProject.bannerImage}
                         alt={previewProject.screenshots[activeTabIdx]?.title}
-                        className="showcase-img"
+                        className="showcase-frame-img"
                       />
                     ) : (
-                      <div className="showcase-mockup-graphic">
-                        <Terminal size={32} className="text-cyan mb-2" />
-                        <span className="font-label-mono text-cyan">Live Interactive Interface</span>
+                      <div className="showcase-frame-graphic">
+                        <Activity size={36} className="text-cyan mb-2" />
+                        <span className="font-label-mono text-cyan">Live Architecture & API Contract</span>
                       </div>
                     )}
-                    <div className="showcase-caption">
-                      <h4 className="caption-title font-body-lg">
+                    <div className="showcase-frame-info">
+                      <h4 className="frame-info-title font-body-lg">
                         {previewProject.screenshots[activeTabIdx]?.title}
                       </h4>
-                      <p className="caption-desc font-body-md">
+                      <p className="frame-info-desc font-body-md">
                         {previewProject.screenshots[activeTabIdx]?.desc}
                       </p>
                     </div>
@@ -311,15 +270,15 @@ export default function ProjectsSection() {
                 </div>
               )}
 
-              {/* Complete Author Ownership Section */}
-              <div className="modal-ownership-section">
-                <h4 className="modal-section-title font-label-mono">
+              {/* Engineering Contributions */}
+              <div className="modal-details-section">
+                <h4 className="details-section-title font-label-mono">
                   <Award size={16} className="text-emerald" />
-                  <span>My Full-Stack Contributions & Architecture</span>
+                  <span>My Core Contributions & Architecture</span>
                 </h4>
-                <div className="modal-ownership-grid">
+                <div className="details-grid">
                   {(previewProject.authorOwnership || previewProject.highlights).map((item, i) => (
-                    <div key={i} className="ownership-card glass-panel">
+                    <div key={i} className="detail-item-card glass-panel">
                       <CheckCircle2 size={16} className="text-emerald flex-shrink-0 mt-1" />
                       <span className="font-body-md">{item}</span>
                     </div>
@@ -327,37 +286,53 @@ export default function ProjectsSection() {
                 </div>
               </div>
 
-              {/* Tech Stack List */}
-              <div className="modal-tech-section">
-                <span className="font-label-mono modal-tech-title">Tech Stack & Tools:</span>
-                <div className="modal-tech-pills">
-                  {previewProject.tech.map((t) => (
-                    <span key={t} className="modal-tech-pill font-label-mono">
-                      {t}
-                    </span>
-                  ))}
+              {/* Quality Assurance Box */}
+              {previewProject.testMetrics && (
+                <div className="modal-qa-card">
+                  <div className="modal-qa-header font-label-mono">
+                    <ShieldCheck size={16} className="text-emerald" />
+                    <span>Automated Quality Assurance & Test Coverage</span>
+                  </div>
+                  <div className="modal-qa-grid">
+                    <div className="modal-qa-item">
+                      <span className="qa-k font-label-mono">Framework</span>
+                      <span className="qa-v">{previewProject.testMetrics.tool}</span>
+                    </div>
+                    <div className="modal-qa-item">
+                      <span className="qa-k font-label-mono">Coverage</span>
+                      <span className="qa-v text-emerald">{previewProject.testMetrics.coverage}</span>
+                    </div>
+                    <div className="modal-qa-item">
+                      <span className="qa-k font-label-mono">Test Scope</span>
+                      <span className="qa-v">{previewProject.testMetrics.testType}</span>
+                    </div>
+                    <div className="modal-qa-item">
+                      <span className="qa-k font-label-mono">Automated Specs</span>
+                      <span className="qa-v text-cyan">{previewProject.testMetrics.suiteCount}</span>
+                    </div>
+                  </div>
                 </div>
-              </div>
+              )}
             </div>
 
-            {/* Modal Footer Actions */}
-            <div className="modal-footer">
+            {/* Modal Footer */}
+            <div className="clean-modal-footer">
               <a
                 href={previewProject.githubUrl}
                 target="_blank"
                 rel="noopener noreferrer"
-                className="button-primary modal-btn-github font-label-mono"
+                className="button-primary footer-btn-github font-label-mono"
               >
                 <GithubIcon size={16} />
-                <span>Explore Source Code on GitHub</span>
+                <span>View Source Code on GitHub</span>
                 <ArrowUpRight size={16} />
               </a>
               <button
                 type="button"
-                className="btn-modal-close-action font-label-mono"
+                className="footer-btn-close font-label-mono"
                 onClick={closePreview}
               >
-                Close Preview
+                Close
               </button>
             </div>
           </div>
