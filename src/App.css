@@ -1265,12 +1265,12 @@ body.light-theme .terminal-widget {
 }
 
 /* --- 5. Experience Timeline --- */
-/* --- 5. Experience Timeline --- */
 .timeline-wrapper {
   position: relative;
   max-width: 1000px;
   margin: 0 auto;
   padding: 30px 0;
+  isolation: isolate; /* Clean stacking context */
 }
 
 .timeline-line {
@@ -1280,7 +1280,8 @@ body.light-theme .terminal-widget {
   left: 18px;
   width: 2px;
   background: linear-gradient(180deg, #38bdf8 0%, #a855f7 50%, rgba(56, 189, 248, 0.1) 100%);
-  z-index: 1;
+  z-index: 0; /* Strictly behind nodes and items */
+  pointer-events: none;
 }
 
 @media (min-width: 768px) {
@@ -1295,6 +1296,7 @@ body.light-theme .terminal-widget {
   margin-bottom: 48px;
   display: flex;
   flex-direction: column;
+  z-index: 2; /* Sits above timeline-line */
 }
 
 @media (min-width: 768px) {
@@ -1305,6 +1307,7 @@ body.light-theme .terminal-widget {
     align-items: center;
     width: 100%;
     margin-bottom: 60px;
+    z-index: 2;
   }
 }
 
@@ -1313,20 +1316,22 @@ body.light-theme .terminal-widget {
   left: 18px;
   top: 24px;
   transform: translate(-50%, 0);
-  width: 32px;
-  height: 32px;
+  width: 36px;
+  height: 36px;
   border-radius: 50%;
-  background: #0d1322;
-  border: 2px solid #38bdf8;
+  background: #0a0e1a !important; /* Fully opaque so line never shows through */
+  border: 2px solid #38bdf8 !important;
   display: flex;
   align-items: center;
   justify-content: center;
-  z-index: 10;
-  box-shadow: 0 0 14px rgba(56, 189, 248, 0.6);
+  z-index: 25 !important; /* Strictly on top of line and all background elements */
+  box-shadow: 0 0 16px rgba(56, 189, 248, 0.7), 0 0 30px rgba(56, 189, 248, 0.25);
 }
 
 body.light-theme .timeline-node {
-  background: #ffffff;
+  background: #ffffff !important;
+  border-color: #0284c7 !important;
+  box-shadow: 0 0 16px rgba(2, 132, 199, 0.4);
 }
 
 @media (min-width: 768px) {
@@ -1388,9 +1393,10 @@ body.light-theme .timeline-node {
 
 .timeline-card {
   padding: 24px 28px;
-  margin-left: 46px;
-  width: calc(100% - 46px);
+  margin-left: 54px;
+  width: calc(100% - 54px);
   position: relative;
+  z-index: 2;
 }
 
 @media (min-width: 768px) {
