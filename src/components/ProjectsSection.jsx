@@ -18,6 +18,7 @@ import { GithubIcon } from './BrandIcons';
 import { projects } from '../data/projects';
 import { MagneticButton } from './ui/MagneticButton';
 import { BackgroundGradient } from './ui/BackgroundGradient';
+import { ProjectMockupBanner } from './ProjectMockupBanner';
 
 export default function ProjectsSection() {
   const [activeFilter, setActiveFilter] = useState('All');
@@ -96,42 +97,23 @@ export default function ProjectsSection() {
               project.featured ? 'is-featured' : ''
             }`}
           >
-            {/* Visual Image Banner */}
+            {/* Visual Interactive Mockup Banner */}
             <div
               className="project-banner-box"
               onClick={() => openPreview(project)}
               role="button"
               tabIndex={0}
+              title="Click to view interactive UI & architecture"
             >
-              {project.bannerImage ? (
-                <div className="banner-img-wrap">
-                  <img
-                    src={project.bannerImage}
-                    alt={project.title}
-                    className="banner-img"
-                    loading="lazy"
-                  />
-                  <div className="banner-badge font-label-mono">
-                    <Eye size={13} />
-                    <span>View UI & Screenshots</span>
-                  </div>
-                </div>
-              ) : (
-                <div
-                  className="banner-placeholder"
-                  style={{
-                    background: `linear-gradient(135deg, ${project.accentColor}15, rgba(15, 23, 42, 0.85))`
-                  }}
-                >
-                  <div className="placeholder-icon" style={{ borderColor: `${project.accentColor}30` }}>
-                    {getProjectIcon(project.previewType)}
-                  </div>
-                  <span className="banner-badge font-label-mono">
-                    <Eye size={13} />
-                    <span>View Architecture</span>
-                  </span>
-                </div>
-              )}
+              <ProjectMockupBanner
+                type={project.previewType}
+                title={project.title}
+                accentColor={project.accentColor}
+              />
+              <div className="banner-badge font-label-mono">
+                <Eye size={13} />
+                <span>View Full UI & Details</span>
+              </div>
             </div>
 
             {/* Card Content Header */}
@@ -252,18 +234,11 @@ export default function ProjectsSection() {
                   </div>
 
                   <div className="showcase-preview-frame">
-                    {previewProject.bannerImage ? (
-                      <img
-                        src={previewProject.bannerImage}
-                        alt={previewProject.screenshots[activeTabIdx]?.title}
-                        className="showcase-frame-img"
-                      />
-                    ) : (
-                      <div className="showcase-frame-graphic">
-                        <Activity size={36} className="text-cyan mb-2" />
-                        <span className="font-label-mono text-cyan">Live Architecture & API Contract</span>
-                      </div>
-                    )}
+                    <ProjectMockupBanner
+                      type={previewProject.previewType}
+                      title={previewProject.title}
+                      accentColor={previewProject.accentColor}
+                    />
                     <div className="showcase-frame-info">
                       <h4 className="frame-info-title font-body-lg">
                         {previewProject.screenshots[activeTabIdx]?.title}
