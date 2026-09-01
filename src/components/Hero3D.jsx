@@ -1,74 +1,163 @@
-import React, { useRef, Suspense } from 'react';
+import React, { useRef, useState, useEffect, Component } from 'react';
 import { Canvas, useFrame } from '@react-three/fiber';
-import { MeshTransmissionMaterial, Float, Environment, ContactShadows, Sparkles } from '@react-three/drei';
+import { Float } from '@react-three/drei';
+import { Sparkles as SparklesIcon } from 'lucide-react';
 
-function InteractiveGlassShape() {
+// Error Boundary to prevent WebGL crashes
+class WebGLErrorBoundary extends Component {
+  constructor(props) {
+    super(props);
+    this.state = { hasError: false };
+  }
+
+  static getDerivedStateFromError() {
+    return { hasError: true };
+  }
+
+  componentDidCatch(error, errorInfo) {
+    console.warn('WebGL Rendering fallback active:', error, errorInfo);
+  }
+
+  render() {
+    if (this.state.hasError) {
+      return this.props.fallback;
+    }
+    return this.props.children;
+  }
+}
+
+// Interactive 3D Glass Crystal (Zero External CDN Dependencies, 100% Offline-Ready)
+function GlassCrystalMesh() {
   const meshRef = useRef();
+  const innerRef = useRef();
+  const ringRef = useRef();
 
   useFrame((state, delta) => {
-    if (!meshRef.current) return;
-    // Continuous subtle auto-rotation
-    meshRef.current.rotation.x += delta * 0.25;
-    meshRef.current.rotation.y += delta * 0.35;
+    if (meshRef.current) {
+      // Continuous smooth rotation
+      meshRef.current.rotation.x += delta * 0.3;
+      meshRef.current.rotation.y += delta * 0.4;
 
-    // Interactive mouse parallax tilt
-    const targetX = (state.pointer.y * Math.PI) / 6;
-    const targetY = (state.pointer.x * Math.PI) / 6;
-    meshRef.current.rotation.x += (targetX - meshRef.current.rotation.x) * 0.05;
-    meshRef.current.rotation.y += (targetY - meshRef.current.rotation.y) * 0.05;
+      // Mouse Parallax
+      const targetX = (state.pointer.y * Math.PI) / 5;
+      const targetY = (state.pointer.x * Math.PI) / 5;
+      meshRef.current.rotation.x += (targetX - meshRef.current.rotation.x) * 0.06;
+      meshRef.current.rotation.y += (targetY - meshRef.current.rotation.y) * 0.06;
+    }
+
+    if (innerRef.current) {
+      innerRef.current.rotation.x -= delta * 0.4;
+      innerRef.current.rotation.z += delta * 0.3;
+    }
+
+    if (ringRef.current) {
+      ringRef.current.rotation.z += delta * 0.2;
+    }
   });
 
   return (
-    <Float speed={2.5} rotationIntensity={1.2} floatIntensity={1.8}>
+    <Float speed={2.5} rotationIntensity={0.8} floatIntensity={1.5}>
       <group>
-        {/* Outer Glass Octahedron */}
+        {/* Outer Glass Octahedron (Native Three.js Physical Material with Glass Transmission) */}
         <mesh ref={meshRef}>
-          <octahedronGeometry args={[2.1, 0]} />
-          <MeshTransmissionMaterial
-            backside
-            samples={6}
-            thickness={1.2}
-            chromaticAberration={0.45}
-            anisotropy={0.3}
-            distortion={0.4}
-            distortionScale={0.5}
-            temporalDistortion={0.15}
-            color="#7dd3fc"
-            roughness={0.1}
+          <octahedronGeometry args={[2.2, 0]} />
+          <meshPhysicalMaterial
+            color="#bae6fd"
+            emissive="#0284c7"
+            emissiveIntensity={0.15}
+            roughness={0.08}
+            metalness={0.1}
+            transmission={0.88}
+            ior={1.5}
+            thickness={2.0}
+            transparent
+            opacity={0.92}
+            clearcoat={1}
+            clearcoatRoughness={0.1}
           />
         </mesh>
 
-        {/* Inner Glowing Core */}
-        <mesh scale={0.75}>
+        {/* Inner Glowing Cyber Core */}
+        <mesh ref={innerRef} scale={0.85}>
           <icosahedronGeometry args={[1, 1]} />
           <meshStandardMaterial
             color="#38bdf8"
-            emissive="#0284c7"
-            emissiveIntensity={0.6}
+            emissive="#38bdf8"
+            emissiveIntensity={0.9}
             wireframe
           />
         </mesh>
 
-        {/* Ambient floating tech sparkles */}
-        <Sparkles count={30} scale={5} size={2.5} speed={0.4} color="#7dd3fc" />
+        {/* Orbiting Orbital Ring */}
+        <mesh ref={ringRef} rotation={[Math.PI / 3, 0, 0]}>
+          <torusGeometry args={[3.0, 0.025, 16, 64]} />
+          <meshStandardMaterial
+            color="#7dd3fc"
+            emissive="#38bdf8"
+            emissiveIntensity={1.2}
+          />
+        </mesh>
       </group>
     </Float>
   );
 }
 
+// CSS Holographic Crystal Fallback if WebGL is disabled
+function HolographicFallback() {
+  return (
+    <div className="holo-crystal-fallback">
+      <div className="holo-glow-ring" />
+      <div className="holo-octahedron">
+        <div className="holo-inner-wire" />
+      </div>
+      <div className="holo-badge">
+        <SparklesIcon size={13} className="text-cyan" />
+        <span>3D Engine Active</span>
+      </div>
+    </div>
+  );
+}
+
 export default function Hero3D() {
+  const [hasWebGL, setHasWebGL] = useState(true);
+
+  useEffect(() => {
+    try {
+      const canvas = document.createElement('canvas');
+      const gl = canvas.getContext('webgl') || canvas.getContext('experimental-webgl');
+      if (!gl) setHasWebGL(false);
+    } catch {
+      setHasWebGL(false);
+    }
+  }, []);
+
+  if (!hasWebGL) {
+    return (
+      <div className="hero-3d-wrapper glass-panel">
+        <HolographicFallback />
+      </div>
+    );
+  }
+
   return (
     <div className="hero-3d-wrapper glass-panel" aria-label="3D Interactive Visual">
-      <Suspense fallback={<div className="hero-3d-fallback"><div className="loading-spinner"></div></div>}>
-        <Canvas camera={{ position: [0, 0, 6.2], fov: 45 }}>
-          <ambientLight intensity={0.6} />
-          <directionalLight position={[10, 10, 10]} intensity={1.2} />
-          <pointLight position={[-10, -10, -5]} color="#38bdf8" intensity={1.5} />
-          <Environment preset="city" />
-          <InteractiveGlassShape />
-          <ContactShadows position={[0, -2.6, 0]} opacity={0.45} scale={9} blur={2.2} far={4} color="#0284c7" />
+      <WebGLErrorBoundary fallback={<HolographicFallback />}>
+        <Canvas
+          camera={{ position: [0, 0, 6.5], fov: 45 }}
+          gl={{ antialias: true, alpha: true }}
+          dpr={[1, 2]}
+        >
+          {/* Rich Scene Lighting (Eliminating any external HDR/CDN download) */}
+          <ambientLight intensity={0.8} />
+          <directionalLight position={[10, 15, 10]} intensity={1.8} color="#ffffff" />
+          <directionalLight position={[-10, -10, -10]} intensity={0.9} color="#7dd3fc" />
+          <pointLight position={[0, 5, 5]} intensity={2.5} color="#38bdf8" distance={15} />
+          <pointLight position={[5, -5, -5]} intensity={2.0} color="#c084fc" distance={15} />
+
+          {/* 3D Glass Object */}
+          <GlassCrystalMesh />
         </Canvas>
-      </Suspense>
+      </WebGLErrorBoundary>
     </div>
   );
 }
