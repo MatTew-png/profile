@@ -1452,19 +1452,27 @@ body.light-theme .timeline-node {
   line-height: 1.5;
 }
 
-/* --- 6. Contact Section --- */
+/* --- 6. Contact Section (Fully Responsive) --- */
 .contact-container {
   display: grid;
   grid-template-columns: 1fr;
-  gap: 40px;
-  padding: 36px;
+  gap: 32px;
+  padding: 22px 18px;
+  border-radius: 16px;
 }
 
-@media (min-width: 860px) {
+@media (min-width: 640px) {
   .contact-container {
-    grid-template-columns: 1fr 1.2fr;
+    padding: 32px 28px;
+    gap: 40px;
+  }
+}
+
+@media (min-width: 960px) {
+  .contact-container {
+    grid-template-columns: 1fr 1.15fr;
     padding: 48px;
-    gap: 60px;
+    gap: 56px;
   }
 }
 
@@ -1476,29 +1484,42 @@ body.light-theme .timeline-node {
 .contact-info-title {
   margin-bottom: 12px;
   color: var(--on-surface);
+  font-size: clamp(22px, 3.5vw, 30px);
+  line-height: 1.2;
 }
 
 .contact-info-desc {
   color: var(--on-surface-variant);
   line-height: 1.6;
-  margin-bottom: 28px;
+  margin-bottom: 24px;
+  font-size: 15px;
 }
 
 .email-copy-box {
   background: rgba(255, 255, 255, 0.04);
   border: 1px solid rgba(255, 255, 255, 0.1);
-  padding: 16px 20px;
-  border-radius: 10px;
+  padding: 14px 16px;
+  border-radius: 12px;
   display: flex;
-  justify-content: space-between;
-  align-items: center;
-  margin-bottom: 28px;
+  flex-direction: column;
+  gap: 12px;
+  margin-bottom: 24px;
+}
+
+@media (min-width: 480px) {
+  .email-copy-box {
+    flex-direction: row;
+    justify-content: space-between;
+    align-items: center;
+    padding: 16px 20px;
+  }
 }
 
 .email-label-group {
   display: flex;
   flex-direction: column;
   gap: 4px;
+  min-width: 0;
 }
 
 .email-label {
@@ -1507,9 +1528,16 @@ body.light-theme .timeline-node {
 }
 
 .email-value {
-  font-size: 14px;
+  font-size: 13px;
   color: var(--primary);
   font-weight: 700;
+  word-break: break-all;
+}
+
+@media (min-width: 480px) {
+  .email-value {
+    font-size: 14px;
+  }
 }
 
 .btn-copy-email {
@@ -1517,14 +1545,22 @@ body.light-theme .timeline-node {
   border: 1px solid rgba(56, 189, 248, 0.25);
   color: var(--primary);
   padding: 8px 14px;
-  border-radius: 6px;
+  border-radius: 8px;
   font-size: 12px;
   cursor: pointer;
   display: inline-flex;
   align-items: center;
+  justify-content: center;
   gap: 6px;
   font-weight: 600;
   transition: all 0.2s ease;
+  align-self: flex-start;
+}
+
+@media (min-width: 480px) {
+  .btn-copy-email {
+    align-self: auto;
+  }
 }
 
 .btn-copy-email:hover {
@@ -1534,7 +1570,7 @@ body.light-theme .timeline-node {
 .contact-meta-list {
   display: flex;
   flex-direction: column;
-  gap: 12px;
+  gap: 14px;
   margin-bottom: 28px;
   font-size: 14px;
   color: var(--on-surface-variant);
@@ -1542,21 +1578,30 @@ body.light-theme .timeline-node {
 
 .contact-meta-item {
   display: flex;
-  align-items: center;
+  align-items: flex-start;
   gap: 10px;
+  line-height: 1.5;
+}
+
+.contact-meta-item svg {
+  flex-shrink: 0;
+  margin-top: 2px;
 }
 
 .contact-social-pills {
   display: flex;
-  gap: 12px;
+  flex-wrap: wrap;
+  gap: 10px;
   margin-top: auto;
+  padding-top: 8px;
 }
 
 .social-pill {
   display: inline-flex;
   align-items: center;
+  justify-content: center;
   gap: 8px;
-  padding: 8px 16px;
+  padding: 9px 16px;
   border-radius: 8px;
   background: rgba(255, 255, 255, 0.05);
   border: 1px solid rgba(255, 255, 255, 0.1);
@@ -1564,6 +1609,15 @@ body.light-theme .timeline-node {
   font-size: 13px;
   text-decoration: none;
   transition: all 0.2s ease;
+  flex: 1 1 auto;
+  min-width: 110px;
+}
+
+@media (min-width: 768px) {
+  .social-pill {
+    flex: 0 1 auto;
+    min-width: unset;
+  }
 }
 
 .social-pill:hover {
@@ -1575,13 +1629,15 @@ body.light-theme .timeline-node {
 .contact-form {
   display: flex;
   flex-direction: column;
-  gap: 18px;
+  gap: 16px;
+  width: 100%;
 }
 
 .form-group {
   display: flex;
   flex-direction: column;
   gap: 6px;
+  width: 100%;
 }
 
 .form-label {
@@ -1590,15 +1646,24 @@ body.light-theme .timeline-node {
 }
 
 .form-input {
+  width: 100%;
   background: rgba(255, 255, 255, 0.04);
   border: 1px solid rgba(255, 255, 255, 0.1);
   border-radius: 8px;
-  padding: 12px 16px;
+  padding: 12px 14px;
   color: var(--on-surface);
   font-family: inherit;
-  font-size: 14px;
+  font-size: 16px; /* 16px prevents iOS Safari auto-zoom on focus */
   outline: none;
-  transition: border-color 0.2s ease;
+  transition: border-color 0.2s ease, background 0.2s ease;
+  box-sizing: border-box;
+}
+
+@media (min-width: 768px) {
+  .form-input {
+    font-size: 14px;
+    padding: 12px 16px;
+  }
 }
 
 .form-input:focus {
@@ -1608,12 +1673,22 @@ body.light-theme .timeline-node {
 
 .form-textarea {
   resize: vertical;
-  min-height: 100px;
+  min-height: 110px;
 }
 
 .submit-btn {
-  align-self: flex-start;
-  margin-top: 8px;
+  width: 100%;
+  justify-content: center;
+  margin-top: 6px;
+  padding: 14px 24px;
+}
+
+@media (min-width: 640px) {
+  .submit-btn {
+    width: auto;
+    align-self: flex-start;
+    padding: 12px 24px;
+  }
 }
 
 /* --- 7. Command Palette Modal --- */
