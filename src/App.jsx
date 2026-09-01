@@ -7,11 +7,6 @@ import {
   Terminal,
   Sparkles,
   MapPin,
-  Home,
-  User,
-  FolderGit2,
-  Briefcase,
-  Mail,
 } from 'lucide-react';
 import CustomCursor from './components/CustomCursor';
 import ScrollProgress from './components/ScrollProgress';
@@ -27,13 +22,11 @@ import TechStackSection from './components/TechStackSection';
 import ExperienceTimeline from './components/ExperienceTimeline';
 import ContactSection from './components/ContactSection';
 import Footer from './components/Footer';
-import { GithubIcon } from './components/BrandIcons';
 import './App.css';
 
 import { FlipWords } from './components/ui/FlipWords';
 import { EncryptedText } from './components/ui/EncryptedText';
 import { MagneticButton } from './components/ui/MagneticButton';
-import { FloatingDock } from './components/ui/FloatingDock';
 import { NoiseBackground } from './components/ui/NoiseBackground';
 
 export default function App() {
@@ -92,46 +85,6 @@ export default function App() {
     return () => observer.disconnect();
   }, []);
 
-  const dockItems = [
-    {
-      title: 'Hero',
-      icon: <Home size={18} />,
-      href: '#about',
-    },
-    {
-      title: 'About',
-      icon: <User size={18} />,
-      href: '#bento',
-    },
-    {
-      title: 'Test Runner',
-      icon: <Terminal size={18} />,
-      href: '#test-runner',
-    },
-    {
-      title: 'Projects',
-      icon: <FolderGit2 size={18} />,
-      href: '#projects',
-    },
-    {
-      title: 'Experience',
-      icon: <Briefcase size={18} />,
-      href: '#experience',
-    },
-    {
-      title: 'Contact',
-      icon: <Mail size={18} />,
-      href: '#contact',
-    },
-    {
-      title: 'GitHub',
-      icon: <GithubIcon size={18} />,
-      href: 'https://github.com/MatTew-png',
-      target: '_blank',
-      rel: 'noopener noreferrer',
-    },
-  ];
-
   return (
     <>
       {/* Noise Texture Background */}
@@ -141,7 +94,6 @@ export default function App() {
       <CustomCursor />
       <ScrollProgress />
       <FloatingScrollSpy />
-      <FloatingDock items={dockItems} />
 
       {/* Navigation & Overlays */}
       <Navbar
