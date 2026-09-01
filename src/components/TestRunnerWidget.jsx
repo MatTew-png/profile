@@ -1,6 +1,7 @@
 import React, { useState, useEffect, useRef } from 'react';
 import { Terminal, Play, RotateCcw, CheckCircle2, AlertCircle, Clock, ShieldCheck, Sparkles } from 'lucide-react';
 import confetti from 'canvas-confetti';
+import { EncryptedText } from './ui/EncryptedText';
 import { testSuites } from '../data/testSuites';
 
 export default function TestRunnerWidget() {
@@ -90,7 +91,7 @@ export default function TestRunnerWidget() {
           </div>
           <div className="terminal-title">
             <Terminal size={14} className="terminal-icon" />
-            <span>qa-tester@burapha-cs:~/{activeSuite.id} (bash)</span>
+            <span><EncryptedText text="qa-tester@burapha-cs:~/" />{activeSuite.id} (bash)</span>
           </div>
           <div className="terminal-status">
             {isRunning ? (

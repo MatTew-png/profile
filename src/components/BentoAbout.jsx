@@ -1,5 +1,6 @@
 import React from 'react';
 import { GraduationCap, Users, ShieldCheck, Zap, MapPin, Sparkles, Code2, CheckCircle2 } from 'lucide-react';
+import { EncryptedText } from './ui/EncryptedText';
 
 export default function BentoAbout() {
   return (
@@ -9,7 +10,7 @@ export default function BentoAbout() {
           <Sparkles size={14} className="badge-icon" />
           <span>Core Highlights</span>
         </div>
-        <h2 className="font-headline-md section-title">About & Credentials</h2>
+        <h2 className="font-headline-md section-title">About &amp; Credentials</h2>
         <p className="font-body-md section-subtitle">
           Bridging the gap between scalable full-stack web engineering and test-driven quality assurance.
         </p>
@@ -24,7 +25,9 @@ export default function BentoAbout() {
             </div>
             <span className="bento-badge">Academic Foundation</span>
           </div>
-          <h3 className="bento-title">Computer Science @ Burapha University</h3>
+          <h3 className="bento-title">
+            Computer Science @ <EncryptedText text="Burapha University" className="text-cyan" />
+          </h3>
           <p className="bento-text">
             Studying at the Faculty of Informatics, Burapha University (Expected graduation: April 2026).
             Grounded in software engineering, database normalization, system design, and algorithmic problem-solving.

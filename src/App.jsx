@@ -16,6 +16,9 @@ import ContactSection from './components/ContactSection';
 import Footer from './components/Footer';
 import './App.css';
 
+import { FlipWords } from './components/ui/FlipWords';
+import { EncryptedText } from './components/ui/EncryptedText';
+
 export default function App() {
   const [isLightMode, setIsLightMode] = useState(() => {
     return localStorage.getItem('theme') === 'light';
@@ -117,11 +120,21 @@ export default function App() {
             </div>
 
             <h1 className="font-display-lg hero-title animate-fade-in-up">
-              Hello, I am <span className="gradient-text">Phattharraphon Jansanga</span>
+              Hello, I am <EncryptedText text="Phattharaphon Jansanga" className="gradient-text" />
             </h1>
 
-            <h2 className="font-headline-md hero-subtitle animate-fade-in-up delay-100">
-              Application Developer | Full-Stack Developer | Automated QA Tester
+            <h2 className="font-headline-md hero-subtitle animate-fade-in-up delay-100 flex items-center flex-wrap gap-2">
+              <span className="text-secondary">Application Developer &amp;</span>
+              <FlipWords
+                words={[
+                  'Full-Stack Engineer',
+                  'Automated QA Tester',
+                  'API & WebSocket Specialist',
+                  'NestJS & FastAPI Developer',
+                  'Cypress & Postman Tester',
+                ]}
+                duration={2600}
+              />
             </h2>
 
             <p className="font-body-lg hero-description animate-fade-in-up delay-200">
