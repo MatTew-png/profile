@@ -25,11 +25,12 @@ export const projects = [
       'Constructed complete staff biometric attendance tracking, monthly payroll engine, and expense reporting.'
     ],
     testMetrics: {
-      tool: 'Jest & Unit Testing',
-      coverage: '92% Core Business Logic',
-      testType: 'Integration, Unit & POS Smoke Tests',
-      suiteCount: '18 Test Specs'
+      tool: 'Jest & E2E Verification',
+      coverage: '96% Business Workflows',
+      testType: 'POS Cashier, Loyalty & Stock ERP Suite',
+      suiteCount: '28 Test Cases (100% Passed)'
     },
+    testingDocUrl: 'https://github.com/MatTew-png/monkkato-pos/blob/main/TESTING_DOCUMENTATION.md',
     screenshots: [
       {
         title: 'POS Cashier Order Interface',
@@ -81,11 +82,12 @@ export const projects = [
       'Completed comprehensive SDLC documentation: C4 Architecture Model, ERD, Class Diagram, and UAT test plan.'
     ],
     testMetrics: {
-      tool: 'Postman & UAT Script',
+      tool: 'Postman, Vitest & UAT Suite',
       coverage: '100% Core Requirements',
-      testType: 'API Contract & UAT Verification',
-      suiteCount: 'Full SDLC & UAT Suite'
+      testType: 'Sub-35ms Latency, Telemetry & Alarm Verification',
+      suiteCount: '32 Test Cases (100% Passed)'
     },
+    testingDocUrl: 'https://github.com/MatTew-png/patient-monitoring-system/blob/main/TESTING_DOCUMENTATION.md',
     screenshots: [
       {
         title: 'Live Telemetry & Vital Graphs',
