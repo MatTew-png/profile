@@ -509,13 +509,29 @@ body.light-theme .gradient-text {
     grid-template-columns: repeat(12, 1fr);
   }
 
-  .bento-card-large {
+  .bento-col-large,
+  .bento-card-large,
+  .bento-grid > .bento-col-large {
     grid-column: span 7;
   }
 
-  .bento-card-medium {
+  .bento-col-medium,
+  .bento-card-medium,
+  .bento-grid > .bento-col-medium {
     grid-column: span 5;
   }
+}
+
+.bento-grid > .gsap-tilt-container {
+  height: 100%;
+  display: flex;
+  width: 100%;
+}
+
+.bento-grid .gsap-tilt-card {
+  height: 100%;
+  width: 100%;
+  display: flex;
 }
 
 .bento-card {
@@ -525,6 +541,9 @@ body.light-theme .gradient-text {
   justify-content: space-between;
   position: relative;
   overflow: hidden;
+  height: 100%;
+  width: 100%;
+  border-radius: 20px;
 }
 
 .bento-card:hover {

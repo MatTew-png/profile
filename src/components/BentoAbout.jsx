@@ -21,9 +21,9 @@ export default function BentoAbout() {
       </div>
 
       <div className="bento-grid">
-        {/* Card 1: Main Bio & University */}
-        <Gsap3DTilt maxTilt={6} depthStrength={20} className="reveal-on-scroll stagger-1">
-          <div className="bento-card bento-card-large glass-panel">
+        {/* Card 1: Main Bio & University (7 cols) */}
+        <Gsap3DTilt maxTilt={5} depthStrength={18} className="bento-col-large reveal-on-scroll stagger-1">
+          <div className="bento-card glass-panel">
             <div className="bento-card-header tilt-depth-1">
               <div className="bento-icon-wrapper">
                 <GraduationCap size={22} className="text-cyan" />
@@ -49,9 +49,9 @@ export default function BentoAbout() {
           </div>
         </Gsap3DTilt>
 
-        {/* Card 2: Live Status & Location */}
-        <Gsap3DTilt maxTilt={7} depthStrength={22} className="reveal-on-scroll stagger-2">
-          <div className="bento-card bento-card-medium glass-panel glow-card">
+        {/* Card 2: Live Status & Location (5 cols) */}
+        <Gsap3DTilt maxTilt={6} depthStrength={20} className="bento-col-medium reveal-on-scroll stagger-2">
+          <div className="bento-card glass-panel glow-card">
             <div className="bento-card-header tilt-depth-1">
               <div className="live-status-pill">
                 <span className="pulsing-emerald-dot" />
@@ -69,9 +69,9 @@ export default function BentoAbout() {
           </div>
         </Gsap3DTilt>
 
-        {/* Card 3: Teaching Assistant (Leadership & Mentorship) */}
-        <Gsap3DTilt maxTilt={7} depthStrength={22} className="reveal-on-scroll stagger-3">
-          <div className="bento-card bento-card-medium glass-panel">
+        {/* Card 3: Teaching Assistant (5 cols) */}
+        <Gsap3DTilt maxTilt={6} depthStrength={20} className="bento-col-medium reveal-on-scroll stagger-3">
+          <div className="bento-card glass-panel">
             <div className="bento-card-header tilt-depth-1">
               <div className="bento-icon-wrapper">
                 <Users size={22} className="text-purple" />
@@ -89,9 +89,9 @@ export default function BentoAbout() {
           </div>
         </Gsap3DTilt>
 
-        {/* Card 4: The QA + Dev Dual Advantage */}
-        <Gsap3DTilt maxTilt={6} depthStrength={20} className="reveal-on-scroll stagger-4">
-          <div className="bento-card bento-card-large glass-panel">
+        {/* Card 4: The QA + Dev Dual Advantage (7 cols) */}
+        <Gsap3DTilt maxTilt={5} depthStrength={18} className="bento-col-large reveal-on-scroll stagger-4">
+          <div className="bento-card glass-panel">
             <div className="bento-card-header tilt-depth-1">
               <div className="bento-icon-wrapper">
                 <ShieldCheck size={22} className="text-emerald" />
