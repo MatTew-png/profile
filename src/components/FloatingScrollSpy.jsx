@@ -1,16 +1,18 @@
 import React, { useState, useEffect } from 'react';
+import { useLanguage } from '../context/LanguageContext';
 
 const sections = [
-  { id: 'about', label: 'About & Hero' },
-  { id: 'bento', label: 'Highlights' },
-  { id: 'test-runner', label: 'Test Runner' },
-  { id: 'projects', label: 'Projects' },
-  { id: 'stack', label: 'Skills & Stack' },
-  { id: 'experience', label: 'Experience' },
-  { id: 'contact', label: 'Contact' }
+  { id: 'about', key: 'nav.about' },
+  { id: 'bento', key: 'nav.highlights' },
+  { id: 'test-runner', key: 'nav.testing' },
+  { id: 'projects', key: 'nav.projects' },
+  { id: 'stack', key: 'nav.stack' },
+  { id: 'experience', key: 'nav.experience' },
+  { id: 'contact', key: 'nav.contact' }
 ];
 
 export default function FloatingScrollSpy() {
+  const { t } = useLanguage();
   const [activeSection, setActiveSection] = useState('about');
   const [hoveredSection, setHoveredSection] = useState(null);
 
@@ -49,6 +51,7 @@ export default function FloatingScrollSpy() {
         {sections.map((section) => {
           const isActive = activeSection === section.id;
           const isHovered = hoveredSection === section.id;
+          const label = t(section.key);
 
           return (
             <div
@@ -60,14 +63,14 @@ export default function FloatingScrollSpy() {
             >
               {/* Tooltip Label */}
               <span className={`scrollspy-tooltip font-label-mono ${isHovered ? 'visible' : ''}`}>
-                {section.label}
+                {label}
               </span>
 
               {/* Indicator Dot */}
               <button
                 className="scrollspy-dot"
-                aria-label={`Scroll to ${section.label}`}
-                title={section.label}
+                aria-label={`Scroll to ${label}`}
+                title={label}
               >
                 {isActive && <span className="scrollspy-pulse" />}
               </button>
