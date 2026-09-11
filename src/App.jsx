@@ -28,6 +28,7 @@ import { FlipWords } from './components/ui/FlipWords';
 import { EncryptedText } from './components/ui/EncryptedText';
 import { MagneticButton } from './components/ui/MagneticButton';
 import { NoiseBackground } from './components/ui/NoiseBackground';
+import { useLanguage } from './context/LanguageContext';
 
 import gsap from 'gsap';
 import { ScrollTrigger } from 'gsap/ScrollTrigger';
@@ -36,6 +37,7 @@ import { useGSAP } from '@gsap/react';
 gsap.registerPlugin(ScrollTrigger, useGSAP);
 
 export default function App() {
+  const { t, dict, language } = useLanguage();
   const [isLightMode, setIsLightMode] = useState(() => {
     return localStorage.getItem('theme') === 'light';
   });
@@ -215,36 +217,36 @@ export default function App() {
             {/* Live Availability Badge */}
             <div className="hero-status-pill animate-fade-in-up">
               <span className="pulsing-emerald-dot" />
-              <span className="font-label-mono">Open for Opportunities • Hybrid & On-Site</span>
+              <span className="font-label-mono">{t('hero.status')}</span>
             </div>
 
             <h1 className="font-display-lg hero-title animate-fade-in-up">
-              Hello, I am <EncryptedText text="Phattharaphon Jansanga" className="gradient-text" />
+              {t('hero.greeting')}{' '}
+              <EncryptedText
+                key={language}
+                text={t('hero.name')}
+                className="gradient-text"
+              />
             </h1>
 
             <h2 className="font-headline-md hero-subtitle animate-fade-in-up delay-100 flex items-center flex-wrap gap-2">
-              <span className="text-secondary">Application Developer &amp;</span>
+              <span className="text-secondary">{t('hero.subtitlePrefix')}</span>
               <FlipWords
-                words={[
-                  'Full-Stack Engineer',
-                  'Automated QA Tester',
-                  'API & WebSocket Specialist',
-                  'NestJS & FastAPI Developer',
-                  'Cypress & Postman Tester',
-                ]}
+                key={language}
+                words={dict.hero.flipWords}
                 duration={2600}
               />
             </h2>
 
             <p className="font-body-lg hero-description animate-fade-in-up delay-200">
-              Computer Science student at <strong>Burapha University</strong>. I engineer scalable web applications and real-time backend architectures with an unwavering focus on <strong>automated testing (Cypress, Postman, Pytest)</strong> to guarantee reliable software in production.
+              {t('hero.description')}
             </p>
 
             {/* Hero Quick CTAs with Magnetic Physics */}
             <div className="hero-actions animate-fade-in-up delay-300">
               <MagneticButton>
                 <a href="#projects" className="button-primary font-label-mono">
-                  <span>View Projects</span>
+                  <span>{t('hero.viewProjects')}</span>
                   <ArrowRight size={16} />
                 </a>
               </MagneticButton>
@@ -252,7 +254,7 @@ export default function App() {
               <MagneticButton>
                 <a href="#test-runner" className="button-secondary btn-test-action font-label-mono">
                   <Terminal size={16} className="text-cyan" />
-                  <span>Live Test Runner</span>
+                  <span>{t('hero.liveTestRunner')}</span>
                 </a>
               </MagneticButton>
 
@@ -262,7 +264,7 @@ export default function App() {
                   className="button-tertiary font-label-mono"
                 >
                   <Download size={15} />
-                  <span>Request Resume</span>
+                  <span>{t('hero.requestResume')}</span>
                 </a>
               </MagneticButton>
             </div>
@@ -270,18 +272,18 @@ export default function App() {
             {/* Quick Hero Highlights */}
             <div className="hero-trust-bar animate-fade-in-up delay-300">
               <div className="trust-item">
-                <span className="trust-val font-label-mono text-cyan">B.Sc. CS</span>
-                <span className="trust-label">Burapha University</span>
+                <span className="trust-val font-label-mono text-cyan">{t('hero.trustEduVal')}</span>
+                <span className="trust-label">{t('hero.trustEdu')}</span>
               </div>
               <div className="trust-separator" />
               <div className="trust-item">
-                <span className="trust-val font-label-mono text-emerald">100%</span>
-                <span className="trust-label">Automated Test Driven</span>
+                <span className="trust-val font-label-mono text-emerald">{t('hero.trustTestVal')}</span>
+                <span className="trust-label">{t('hero.trustTest')}</span>
               </div>
               <div className="trust-separator" />
               <div className="trust-item">
-                <span className="trust-val font-label-mono text-purple">TA Mentor</span>
-                <span className="trust-label">EDA & Databases</span>
+                <span className="trust-val font-label-mono text-purple">{t('hero.trustTaVal')}</span>
+                <span className="trust-label">{t('hero.trustTa')}</span>
               </div>
             </div>
           </div>

@@ -1,5 +1,7 @@
 import React from 'react';
 import { Sun, Moon, Menu, Search, Terminal } from 'lucide-react';
+import { useLanguage } from '../context/LanguageContext';
+import LanguageSwitcher from './ui/LanguageSwitcher';
 
 export default function Navbar({
   isLightMode,
@@ -8,6 +10,8 @@ export default function Navbar({
   isMobileMenuOpen,
   setIsMobileMenuOpen
 }) {
+  const { t } = useLanguage();
+
   return (
     <header className="header">
       {/* Brand Logo */}
@@ -18,16 +22,19 @@ export default function Navbar({
 
       {/* Desktop Navigation */}
       <nav className="header-nav">
-        <a href="#about" className="font-label-mono">About</a>
-        <a href="#bento" className="font-label-mono">Highlights</a>
+        <a href="#about" className="font-label-mono">{t('nav.about')}</a>
+        <a href="#bento" className="font-label-mono">{t('nav.highlights')}</a>
         <a href="#test-runner" className="font-label-mono nav-featured">
           <Terminal size={14} className="nav-icon text-cyan" />
-          <span>Testing</span>
+          <span>{t('nav.testing')}</span>
         </a>
-        <a href="#projects" className="font-label-mono">Projects</a>
-        <a href="#stack" className="font-label-mono">Stack</a>
-        <a href="#experience" className="font-label-mono">Experience</a>
-        <a href="#contact" className="font-label-mono">Contact</a>
+        <a href="#projects" className="font-label-mono">{t('nav.projects')}</a>
+        <a href="#stack" className="font-label-mono">{t('nav.stack')}</a>
+        <a href="#experience" className="font-label-mono">{t('nav.experience')}</a>
+        <a href="#contact" className="font-label-mono">{t('nav.contact')}</a>
+
+        {/* Language Switcher Pill */}
+        <LanguageSwitcher />
 
         {/* Cmd+K Quick Search Trigger Pill */}
         <button
@@ -37,8 +44,8 @@ export default function Navbar({
           title="Open Command Palette (Cmd+K)"
         >
           <Search size={14} />
-          <span className="cmdk-text">Search</span>
-          <span className="cmdk-kbd">⌘K</span>
+          <span className="cmdk-text">{t('nav.search')}</span>
+          <span className="cmdk-kbd">{t('nav.cmdK')}</span>
         </button>
 
         {/* Theme Toggle Button */}
@@ -54,6 +61,8 @@ export default function Navbar({
 
       {/* Mobile Right Controls */}
       <div className="header-mobile-controls">
+        <LanguageSwitcher compact />
+
         <button
           onClick={onOpenCmdK}
           className="mobile-search-btn"

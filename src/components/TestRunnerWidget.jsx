@@ -4,8 +4,10 @@ import confetti from 'canvas-confetti';
 import { EncryptedText } from './ui/EncryptedText';
 import { testSuites } from '../data/testSuites';
 import Gsap3DTilt from './ui/Gsap3DTilt';
+import { useLanguage } from '../context/LanguageContext';
 
 export default function TestRunnerWidget() {
+  const { t } = useLanguage();
   const [activeSuiteId, setActiveSuiteId] = useState('cypress-e2e');
   const [isRunning, setIsRunning] = useState(false);
   const [completedSteps, setCompletedSteps] = useState([]);
@@ -74,11 +76,11 @@ export default function TestRunnerWidget() {
       <div className="section-header reveal-on-scroll">
         <div className="badge-pill">
           <ShieldCheck size={14} className="badge-icon" />
-          <span>Automated QA & Reliability</span>
+          <span>{t('testRunner.badge')}</span>
         </div>
-        <h2 className="font-headline-md section-title">Live Automated Test Runner</h2>
+        <h2 className="font-headline-md section-title">{t('testRunner.title')}</h2>
         <p className="font-body-md section-subtitle">
-          Experience our test-driven development in action. Click <strong>Run Tests</strong> to simulate live Cypress & API assertion suites.
+          {t('testRunner.subtitle')}
         </p>
       </div>
 
@@ -98,14 +100,14 @@ export default function TestRunnerWidget() {
           <div className="terminal-status">
             {isRunning ? (
               <span className="status-running">
-                <span className="pulsing-dot" /> Running Specs...
+                <span className="pulsing-dot" /> {t('testRunner.running')}
               </span>
             ) : isFinished ? (
               <span className="status-passed">
-                <CheckCircle2 size={13} /> 100% Passed
+                <CheckCircle2 size={13} /> {t('testRunner.passed')}
               </span>
             ) : (
-              <span className="status-idle">Ready</span>
+              <span className="status-idle">{t('testRunner.ready')}</span>
             )}
           </div>
         </div>
@@ -120,7 +122,7 @@ export default function TestRunnerWidget() {
               className={`terminal-tab ${activeSuiteId === suite.id ? 'active' : ''}`}
             >
               <span>{suite.name}</span>
-              <span className="tab-count">{suite.totalTests} tests</span>
+              <span className="tab-count">{suite.totalTests} {t('testRunner.testsLabel')}</span>
             </button>
           ))}
         </div>
@@ -221,7 +223,7 @@ export default function TestRunnerWidget() {
               title="Reset Terminal"
             >
               <RotateCcw size={14} />
-              <span>Reset</span>
+              <span>{t('testRunner.btnReset')}</span>
             </button>
             <button
               onClick={handleRunTests}
@@ -231,12 +233,12 @@ export default function TestRunnerWidget() {
               {isRunning ? (
                 <>
                   <span className="spin-indicator" />
-                  <span>Executing...</span>
+                  <span>{t('testRunner.btnRunning')}</span>
                 </>
               ) : (
                 <>
                   <Play size={14} fill="currentColor" />
-                  <span>Run Automated Tests</span>
+                  <span>{t('testRunner.btnRun')}</span>
                 </>
               )}
             </button>

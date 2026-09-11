@@ -1,18 +1,21 @@
 import React from 'react';
 import { X, Compass, Terminal, Sparkles, Layers, Calendar, Mail, FileText, Sun, Moon } from 'lucide-react';
 import { GithubIcon, LinkedinIcon } from './BrandIcons';
+import { useLanguage } from '../context/LanguageContext';
+import LanguageSwitcher from './ui/LanguageSwitcher';
 
 export default function MobileMenu({ isOpen, setIsOpen, isLightMode, toggleTheme, onOpenCmdK }) {
+  const { t } = useLanguage();
   if (!isOpen) return null;
 
   const links = [
-    { name: 'About', href: '#about', icon: Compass },
-    { name: 'Highlights', href: '#bento', icon: Sparkles },
-    { name: 'Live Test Runner', href: '#test-runner', icon: Terminal, badge: 'Featured' },
-    { name: 'Projects', href: '#projects', icon: Layers },
-    { name: 'Tech Stack', href: '#stack', icon: Layers },
-    { name: 'Experience', href: '#experience', icon: Calendar },
-    { name: 'Contact', href: '#contact', icon: Mail }
+    { name: t('nav.about'), href: '#about', icon: Compass },
+    { name: t('nav.highlights'), href: '#bento', icon: Sparkles },
+    { name: t('nav.testing'), href: '#test-runner', icon: Terminal, badge: 'Live' },
+    { name: t('nav.projects'), href: '#projects', icon: Layers },
+    { name: t('nav.stack'), href: '#stack', icon: Layers },
+    { name: t('nav.experience'), href: '#experience', icon: Calendar },
+    { name: t('nav.contact'), href: '#contact', icon: Mail }
   ];
 
   const handleLinkClick = (href) => {
@@ -25,7 +28,7 @@ export default function MobileMenu({ isOpen, setIsOpen, isLightMode, toggleTheme
       <div className="mobile-drawer glass-panel" onClick={(e) => e.stopPropagation()}>
         {/* Drawer Header */}
         <div className="mobile-drawer-header">
-          <span className="font-label-mono font-bold text-cyan">MENU NAVIGATION</span>
+          <LanguageSwitcher />
           <button className="mobile-drawer-close" onClick={() => setIsOpen(false)}>
             <X size={22} />
           </button>

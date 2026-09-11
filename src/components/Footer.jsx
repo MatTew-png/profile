@@ -1,8 +1,11 @@
 import React from 'react';
 import { ArrowUp, Mail, Heart } from 'lucide-react';
 import { GithubIcon, LinkedinIcon } from './BrandIcons';
+import { useLanguage } from '../context/LanguageContext';
 
 export default function Footer() {
+  const { t, language } = useLanguage();
+
   const scrollToTop = () => {
     window.scrollTo({ top: 0, behavior: 'smooth' });
   };
@@ -11,9 +14,13 @@ export default function Footer() {
     <footer className="footer scroll-animate">
       <div className="footer-top">
         <div className="footer-brand">
-          <span className="font-label-mono font-bold text-cyan">PHATTHARRAPHON JANSANGA</span>
+          <span className="font-label-mono font-bold text-cyan">
+            {language === 'th' ? 'ภัทรพล จันทร์สง่า (PHATTHARRAPHON J.)' : 'PHATTHARRAPHON JANSANGA'}
+          </span>
           <p className="footer-tagline font-body-sm">
-            Application Developer • Full-Stack Developer • Automated QA Tester
+            {language === 'th'
+              ? 'Application Developer • Full-Stack Developer • Automated QA Tester'
+              : 'Application Developer • Full-Stack Developer • Automated QA Tester'}
           </p>
         </div>
 
@@ -50,15 +57,17 @@ export default function Footer() {
           className="back-to-top-btn font-label-mono"
           aria-label="Back to top"
         >
-          <span>Back to Top</span>
+          <span>{language === 'th' ? 'กลับขึ้นด้านบน' : 'Back to Top'}</span>
           <ArrowUp size={14} />
         </button>
       </div>
 
       <div className="footer-bottom font-label-mono">
-        <p>© 2026 PHATTHARRAPHON JANSANGA. CRAFTED WITH REACT & THREE.JS.</p>
+        <p>© 2026 {t('footer.rights')}</p>
         <p className="footer-built-with">
-          Faculty of Informatics, Burapha University
+          {language === 'th'
+            ? 'คณะวิทยาการสารสนเทศ มหาวิทยาลัยบูรพา • ' + t('footer.builtWith')
+            : 'Faculty of Informatics, Burapha University • ' + t('footer.builtWith')}
         </p>
       </div>
     </footer>

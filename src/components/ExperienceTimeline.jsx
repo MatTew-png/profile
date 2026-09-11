@@ -1,8 +1,11 @@
 import React from 'react';
 import { Calendar, Briefcase, GraduationCap, Users, Sparkles, CheckCircle2 } from 'lucide-react';
 import { experiences } from '../data/experience';
+import { useLanguage } from '../context/LanguageContext';
 
 export default function ExperienceTimeline() {
+  const { t } = useLanguage();
+
   const getIcon = (type) => {
     switch (type) {
       case 'availability':
@@ -21,11 +24,11 @@ export default function ExperienceTimeline() {
       <div className="section-header reveal-on-scroll">
         <div className="badge-pill">
           <Calendar size={14} className="badge-icon" />
-          <span>Journey & Milestones</span>
+          <span>{t('timeline.badge')}</span>
         </div>
-        <h2 className="font-headline-md section-title">Experience & Education</h2>
+        <h2 className="font-headline-md section-title">{t('timeline.title')}</h2>
         <p className="font-body-md section-subtitle">
-          My academic foundation, instructional leadership, and current career trajectory.
+          {t('timeline.subtitle')}
         </p>
       </div>
 

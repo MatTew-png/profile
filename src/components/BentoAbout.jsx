@@ -2,18 +2,21 @@ import React from 'react';
 import { GraduationCap, Users, ShieldCheck, Zap, MapPin, Sparkles, Code2, CheckCircle2 } from 'lucide-react';
 import { EncryptedText } from './ui/EncryptedText';
 import Gsap3DTilt from './ui/Gsap3DTilt';
+import { useLanguage } from '../context/LanguageContext';
 
 export default function BentoAbout() {
+  const { t, language } = useLanguage();
+
   return (
     <section id="bento" className="section-spacing scroll-animate">
       <div className="section-header reveal-on-scroll">
         <div className="badge-pill">
           <Sparkles size={14} className="badge-icon" />
-          <span>Core Highlights</span>
+          <span>{t('bento.badge')}</span>
         </div>
-        <h2 className="font-headline-md section-title">About &amp; Credentials</h2>
+        <h2 className="font-headline-md section-title">{t('bento.title')}</h2>
         <p className="font-body-md section-subtitle">
-          Bridging the gap between scalable full-stack web engineering and test-driven quality assurance.
+          {t('bento.subtitle')}
         </p>
       </div>
 
@@ -25,20 +28,23 @@ export default function BentoAbout() {
               <div className="bento-icon-wrapper">
                 <GraduationCap size={22} className="text-cyan" />
               </div>
-              <span className="bento-badge">Academic Foundation</span>
+              <span className="bento-badge">{t('bento.card1Badge')}</span>
             </div>
             <h3 className="bento-title">
-              Computer Science @ <EncryptedText text="Burapha University" className="text-cyan" />
+              {language === 'th' ? (
+                <>วิทยาการคอมพิวเตอร์ @ <EncryptedText text="มหาวิทยาลัยบูรพา" className="text-cyan" /></>
+              ) : (
+                <>Computer Science @ <EncryptedText text="Burapha University" className="text-cyan" /></>
+              )}
             </h3>
             <p className="bento-text">
-              Studying at the Faculty of Informatics, Burapha University (Expected graduation: April 2026).
-              Grounded in software engineering, database normalization, system design, and algorithmic problem-solving.
+              {t('bento.card1Desc')}
             </p>
             <div className="bento-tags-row tilt-depth-2">
-              <span className="mini-tag">Data Structures</span>
-              <span className="mini-tag">Relational SQL</span>
-              <span className="mini-tag">System Design</span>
-              <span className="mini-tag">Distributed APIs</span>
+              <span className="mini-tag">{language === 'th' ? 'โครงสร้างข้อมูล' : 'Data Structures'}</span>
+              <span className="mini-tag">{language === 'th' ? 'Relational SQL' : 'Relational SQL'}</span>
+              <span className="mini-tag">{language === 'th' ? 'การออกแบบระบบ' : 'System Design'}</span>
+              <span className="mini-tag">{language === 'th' ? 'Distributed APIs' : 'Distributed APIs'}</span>
             </div>
           </div>
         </Gsap3DTilt>
@@ -49,17 +55,16 @@ export default function BentoAbout() {
             <div className="bento-card-header tilt-depth-1">
               <div className="live-status-pill">
                 <span className="pulsing-emerald-dot" />
-                <span>Available for Hire</span>
+                <span>{t('bento.card2Badge')}</span>
               </div>
               <MapPin size={18} className="text-cyan" />
             </div>
-            <h3 className="bento-title">Ready for Immediate Start</h3>
+            <h3 className="bento-title">{t('bento.card2Title')}</h3>
             <p className="bento-text">
-              Actively seeking Full-Stack Developer, Backend Developer, or QA Automated Tester roles.
-              Ready for <strong>On-site</strong> or <strong>Hybrid</strong> work in Bangkok and Chonburi.
+              {t('bento.card2Desc')}
             </p>
             <div className="location-pill tilt-depth-2">
-              <span>📍 Bangkok / Chonburi / Remote</span>
+              <span>{t('bento.card2Location')}</span>
             </div>
           </div>
         </Gsap3DTilt>
@@ -71,16 +76,15 @@ export default function BentoAbout() {
               <div className="bento-icon-wrapper">
                 <Users size={22} className="text-purple" />
               </div>
-              <span className="bento-badge">Leadership</span>
+              <span className="bento-badge">{t('bento.card3Badge')}</span>
             </div>
-            <h3 className="bento-title">Teaching Assistant Experience</h3>
+            <h3 className="bento-title">{t('bento.card3Title')}</h3>
             <p className="bento-text">
-              Served as an Undergraduate Teaching Assistant for <strong>Exploratory Data Analysis</strong> and <strong>Relational Database</strong> courses.
-              Instructed students through hands-on labs and database modeling.
+              {t('bento.card3Desc')}
             </p>
             <div className="bento-stat-highlight tilt-depth-2">
               <CheckCircle2 size={16} className="text-purple" />
-              <span>Demonstrated communication, mentorship & technical empathy</span>
+              <span>{t('bento.card3Highlight')}</span>
             </div>
           </div>
         </Gsap3DTilt>
@@ -92,26 +96,24 @@ export default function BentoAbout() {
               <div className="bento-icon-wrapper">
                 <ShieldCheck size={22} className="text-emerald" />
               </div>
-              <span className="bento-badge">Key Differentiator</span>
+              <span className="bento-badge">{t('bento.card4Badge')}</span>
             </div>
-            <h3 className="bento-title">Full-Stack Capability + Automated Testing Mindset</h3>
+            <h3 className="bento-title">{t('bento.card4Title')}</h3>
             <p className="bento-text">
-              Unlike traditional developers who write code and hope it works, I design features with automated testing in mind from Day 1.
-              From unit and integration contracts (FastAPI, Postman) to full browser regression suites (Cypress),
-              I ensure zero production regressions.
+              {t('bento.card4Desc')}
             </p>
             <div className="bento-metrics-row tilt-depth-2">
               <div className="mini-metric">
                 <span className="num">3+</span>
-                <span className="label">Production-grade Apps</span>
+                <span className="label">{t('bento.metric1Label')}</span>
               </div>
               <div className="mini-metric">
                 <span className="num">50+</span>
-                <span className="label">Automated Test Specs</span>
+                <span className="label">{t('bento.metric2Label')}</span>
               </div>
               <div className="mini-metric">
                 <span className="num">&lt;50ms</span>
-                <span className="label">WebSocket Latency</span>
+                <span className="label">{t('bento.metric3Label')}</span>
               </div>
             </div>
           </div>

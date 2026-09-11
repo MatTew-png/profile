@@ -20,8 +20,10 @@ import { MagneticButton } from './ui/MagneticButton';
 import { BackgroundGradient } from './ui/BackgroundGradient';
 import { ProjectMockupBanner } from './ProjectMockupBanner';
 import Gsap3DTilt from './ui/Gsap3DTilt';
+import { useLanguage } from '../context/LanguageContext';
 
 export default function ProjectsSection() {
+  const { t } = useLanguage();
   const [activeFilter, setActiveFilter] = useState('All');
   const [previewProject, setPreviewProject] = useState(null);
   const [activeTabIdx, setActiveTabIdx] = useState(0);
@@ -68,23 +70,27 @@ export default function ProjectsSection() {
       <div className="section-header reveal-on-scroll">
         <div className="badge-pill">
           <Code2 size={14} className="badge-icon" />
-          <span>Engineering Portfolio</span>
+          <span>{t('projects.badge')}</span>
         </div>
-        <h2 className="font-headline-md section-title">Featured Projects</h2>
+        <h2 className="font-headline-md section-title">{t('projects.title')}</h2>
         <p className="font-body-md section-subtitle">
-          Real-world systems built with clean architecture, modern frameworks, and robust automated testing.
+          {t('projects.subtitle')}
         </p>
       </div>
 
       {/* Filter Tabs */}
       <div className="project-filters reveal-on-scroll stagger-1">
-        {filters.map((filter) => (
+        {[
+          { key: 'All', label: t('projects.filters.all') },
+          { key: 'Full-Stack', label: t('projects.filters.fullstack') },
+          { key: 'Backend / IoT', label: t('projects.filters.backendIot') },
+        ].map(({ key, label }) => (
           <button
-            key={filter}
-            className={`font-label-mono filter-btn ${activeFilter === filter ? 'active' : ''}`}
-            onClick={() => setActiveFilter(filter)}
+            key={key}
+            className={`font-label-mono filter-btn ${activeFilter === key ? 'active' : ''}`}
+            onClick={() => setActiveFilter(key)}
           >
-            {filter}
+            {label}
           </button>
         ))}
       </div>
@@ -122,7 +128,7 @@ export default function ProjectsSection() {
                   />
                   <div className="banner-badge font-label-mono">
                     <Eye size={13} />
-                    <span>View Full UI & Details</span>
+                    <span>{t('projects.viewDetails')}</span>
                   </div>
                 </div>
               </div>
@@ -143,7 +149,7 @@ export default function ProjectsSection() {
 
               {/* Concise Core Contributions */}
               <div className="project-key-points">
-                <span className="key-points-title font-label-mono">Core Highlights:</span>
+                <span className="key-points-title font-label-mono">{t('projects.coreHighlights')}</span>
                 <ul className="key-points-list">
                   {(project.authorOwnership || project.highlights).slice(0, 3).map((pt, i) => (
                     <li key={i}>

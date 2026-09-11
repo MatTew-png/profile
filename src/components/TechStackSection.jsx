@@ -3,8 +3,10 @@ import { Layers, ShieldCheck, Database, Layout, Sparkles, Code2, ArrowRight } fr
 import { skillCategories } from '../data/skills';
 import TechMarquee from './TechMarquee';
 import Gsap3DTilt from './ui/Gsap3DTilt';
+import { useLanguage } from '../context/LanguageContext';
 
 export default function TechStackSection() {
+  const { t } = useLanguage();
   const [activeCategoryIndex, setActiveCategoryIndex] = useState(0);
 
   const getCategoryIcon = (category) => {
@@ -22,11 +24,11 @@ export default function TechStackSection() {
       <div className="section-header reveal-on-scroll">
         <div className="badge-pill">
           <Layers size={14} className="badge-icon" />
-          <span>Technical Repertoire</span>
+          <span>{t('stack.badge')}</span>
         </div>
-        <h2 className="font-headline-md section-title">Skills & Technologies</h2>
+        <h2 className="font-headline-md section-title">{t('stack.title')}</h2>
         <p className="font-body-md section-subtitle">
-          Select a domain below to inspect core tools, frameworks, and architecture proficiency.
+          {t('stack.subtitle')}
         </p>
       </div>
 

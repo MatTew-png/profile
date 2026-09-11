@@ -2,8 +2,10 @@ import React, { useState } from 'react';
 import { Mail, Copy, Check, Send, MapPin, Sparkles } from 'lucide-react';
 import { GithubIcon, LinkedinIcon } from './BrandIcons';
 import Gsap3DTilt from './ui/Gsap3DTilt';
+import { useLanguage } from '../context/LanguageContext';
 
 export default function ContactSection() {
+  const { t } = useLanguage();
   const [copied, setCopied] = useState(false);
   const [formData, setFormData] = useState({ name: '', email: '', subject: '', message: '' });
 
@@ -28,11 +30,11 @@ export default function ContactSection() {
       <div className="section-header reveal-on-scroll">
         <div className="badge-pill">
           <Sparkles size={14} className="badge-icon" />
-          <span>Get in Touch</span>
+          <span>{t('contact.badge')}</span>
         </div>
-        <h2 className="font-headline-md section-title">Let's Build Something Together</h2>
+        <h2 className="font-headline-md section-title">{t('contact.title')}</h2>
         <p className="font-body-md section-subtitle">
-          Open to full-time engineering roles, automated QA opportunities, or freelance collaborations.
+          {t('contact.subtitle')}
         </p>
       </div>
 
@@ -40,9 +42,9 @@ export default function ContactSection() {
         <div className="contact-container glass-panel">
           {/* Left Col: Contact Info & Quick Copy */}
           <div className="contact-info-col tilt-depth-1">
-          <h3 className="contact-info-title font-headline-md">Direct Contact</h3>
+          <h3 className="contact-info-title font-headline-md">{t('contact.directTitle')}</h3>
           <p className="contact-info-desc font-body-md">
-            Whether you have an open role, an interesting project, or want to discuss automated testing architectures, feel free to reach out directly.
+            {t('contact.directDesc')}
           </p>
 
           <div className="email-copy-box">
@@ -107,7 +109,7 @@ export default function ContactSection() {
         <div className="contact-form-col">
           <form className="contact-form" onSubmit={handleSubmit}>
             <div className="form-group">
-              <label className="font-label-mono form-label">Your Name</label>
+              <label className="font-label-mono form-label">{t('contact.formName')}</label>
               <input
                 type="text"
                 className="form-input"
@@ -119,7 +121,7 @@ export default function ContactSection() {
             </div>
 
             <div className="form-group">
-              <label className="font-label-mono form-label">Your Email</label>
+              <label className="font-label-mono form-label">{t('contact.formEmail')}</label>
               <input
                 type="email"
                 className="form-input"
@@ -131,7 +133,7 @@ export default function ContactSection() {
             </div>
 
             <div className="form-group">
-              <label className="font-label-mono form-label">Subject</label>
+              <label className="font-label-mono form-label">{t('contact.formSubject')}</label>
               <input
                 type="text"
                 className="form-input"
@@ -143,11 +145,11 @@ export default function ContactSection() {
             </div>
 
             <div className="form-group">
-              <label className="font-label-mono form-label">Message</label>
+              <label className="font-label-mono form-label">{t('contact.formMessage')}</label>
               <textarea
                 className="form-input form-textarea"
                 rows="4"
-                placeholder="Tell me about your team, tech stack, or project..."
+                placeholder={t('contact.formPlaceholder')}
                 required
                 value={formData.message}
                 onChange={(e) => setFormData({ ...formData, message: e.target.value })}
@@ -156,7 +158,7 @@ export default function ContactSection() {
 
             <button type="submit" className="button-primary submit-btn font-label-mono">
               <Send size={16} />
-              <span>Send Message</span>
+              <span>{t('contact.sendBtn')}</span>
             </button>
           </form>
         </div>
