@@ -1,6 +1,6 @@
-import React, { useState } from 'react';
 import { Mail, Copy, Check, Send, MapPin, Sparkles } from 'lucide-react';
 import { GithubIcon, LinkedinIcon } from './BrandIcons';
+import Gsap3DTilt from './ui/Gsap3DTilt';
 
 export default function ContactSection() {
   const [copied, setCopied] = useState(false);
@@ -35,9 +35,10 @@ export default function ContactSection() {
         </p>
       </div>
 
-      <div className="contact-container glass-panel reveal-on-scroll stagger-2">
-        {/* Left Col: Contact Info & Quick Copy */}
-        <div className="contact-info-col">
+      <Gsap3DTilt maxTilt={3} perspective={1400} depthStrength={12} className="reveal-on-scroll stagger-2">
+        <div className="contact-container glass-panel">
+          {/* Left Col: Contact Info & Quick Copy */}
+          <div className="contact-info-col tilt-depth-1">
           <h3 className="contact-info-title font-headline-md">Direct Contact</h3>
           <p className="contact-info-desc font-body-md">
             Whether you have an open role, an interesting project, or want to discuss automated testing architectures, feel free to reach out directly.
@@ -158,7 +159,8 @@ export default function ContactSection() {
             </button>
           </form>
         </div>
-      </div>
+        </div>
+      </Gsap3DTilt>
     </section>
   );
 }

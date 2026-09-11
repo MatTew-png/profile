@@ -3245,3 +3245,63 @@ body.light-theme .scrollspy-tooltip {
   padding: 2px 8px;
   border-radius: 999px;
 }
+
+/* ========================================================================= */
+/* GSAP 3D Spatial Depth & Tilt Systems */
+/* ========================================================================= */
+.gsap-tilt-container {
+  display: flex;
+  transform-style: preserve-3d;
+  width: 100%;
+}
+
+.gsap-tilt-card {
+  transform-style: preserve-3d;
+  transition: box-shadow 0.3s cubic-bezier(0.16, 1, 0.3, 1), border-color 0.3s ease;
+}
+
+.tilt-depth-1 {
+  transform: translateZ(16px);
+  transform-style: preserve-3d;
+}
+
+.tilt-depth-2 {
+  transform: translateZ(28px);
+  transform-style: preserve-3d;
+}
+
+.tilt-depth-3 {
+  transform: translateZ(42px);
+  transform-style: preserve-3d;
+}
+
+/* GSAP Parallax Ambient Background Orbs */
+.gsap-parallax-orb {
+  position: fixed;
+  border-radius: 50%;
+  filter: blur(90px);
+  pointer-events: none;
+  z-index: 0;
+  opacity: 0.18;
+  will-change: transform;
+}
+
+.gsap-parallax-orb-1 {
+  width: 500px;
+  height: 500px;
+  top: 15%;
+  left: -100px;
+  background: radial-gradient(circle, rgba(56, 189, 248, 0.8) 0%, rgba(14, 165, 233, 0.2) 60%, transparent 80%);
+}
+
+.gsap-parallax-orb-2 {
+  width: 600px;
+  height: 600px;
+  top: 55%;
+  right: -150px;
+  background: radial-gradient(circle, rgba(168, 85, 247, 0.7) 0%, rgba(139, 92, 246, 0.15) 60%, transparent 80%);
+}
+
+body.light-theme .gsap-parallax-orb {
+  opacity: 0.08;
+}

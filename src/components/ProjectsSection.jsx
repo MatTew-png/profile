@@ -19,6 +19,7 @@ import { projects } from '../data/projects';
 import { MagneticButton } from './ui/MagneticButton';
 import { BackgroundGradient } from './ui/BackgroundGradient';
 import { ProjectMockupBanner } from './ProjectMockupBanner';
+import Gsap3DTilt from './ui/Gsap3DTilt';
 
 export default function ProjectsSection() {
   const [activeFilter, setActiveFilter] = useState('All');
@@ -91,97 +92,105 @@ export default function ProjectsSection() {
       {/* Projects Grid */}
       <div className="projects-grid">
         {filteredProjects.map((project, idx) => (
-          <article
+          <Gsap3DTilt
             key={project.id}
-            className={`project-card glass-panel reveal-on-scroll stagger-${(idx % 3) + 1} ${
-              project.featured ? 'is-featured' : ''
-            }`}
+            maxTilt={6}
+            perspective={1100}
+            scale={1.015}
+            depthStrength={22}
+            className={`reveal-on-scroll stagger-${(idx % 3) + 1}`}
           >
-            {/* Visual Real Project Screenshot Banner */}
-            <div
-              className="project-banner-box"
-              onClick={() => openPreview(project)}
-              role="button"
-              tabIndex={0}
-              title="Click to view full-resolution UI screenshots"
+            <article
+              className={`project-card glass-panel ${
+                project.featured ? 'is-featured' : ''
+              }`}
             >
-              <div className="banner-img-wrap">
-                <img
-                  src={project.bannerImage}
-                  alt={project.title}
-                  className="banner-img"
-                  loading="lazy"
-                />
-                <div className="banner-badge font-label-mono">
-                  <Eye size={13} />
-                  <span>View Full UI & Details</span>
+              {/* Visual Real Project Screenshot Banner */}
+              <div
+                className="project-banner-box tilt-depth-2"
+                onClick={() => openPreview(project)}
+                role="button"
+                tabIndex={0}
+                title="Click to view full-resolution UI screenshots"
+              >
+                <div className="banner-img-wrap">
+                  <img
+                    src={project.bannerImage}
+                    alt={project.title}
+                    className="banner-img"
+                    loading="lazy"
+                  />
+                  <div className="banner-badge font-label-mono">
+                    <Eye size={13} />
+                    <span>View Full UI & Details</span>
+                  </div>
                 </div>
               </div>
-            </div>
 
-            {/* Card Content Header */}
-            <div className="project-header-row">
-              <span
-                className="project-badge-tag font-label-mono"
-                style={{ borderColor: project.accentColor, color: project.accentColor }}
-              >
-                {project.badge}
-              </span>
-              <span className="project-role-text font-label-mono">{project.role}</span>
-            </div>
-
-            <h3 className="project-card-title font-headline-md">{project.title}</h3>
-            <p className="project-card-desc font-body-md">{project.description}</p>
-
-            {/* Concise Core Contributions */}
-            <div className="project-key-points">
-              <span className="key-points-title font-label-mono">Core Highlights:</span>
-              <ul className="key-points-list">
-                {(project.authorOwnership || project.highlights).slice(0, 3).map((pt, i) => (
-                  <li key={i}>
-                    <CheckCircle2 size={15} className="point-icon text-cyan" />
-                    <span>{pt}</span>
-                  </li>
-                ))}
-              </ul>
-            </div>
-
-            {/* Tech Stack Chips */}
-            <div className="project-tech-chips">
-              {project.tech.map((t) => (
-                <span key={t} className="tech-chip font-label-mono">
-                  {t}
+              {/* Card Content Header */}
+              <div className="project-header-row tilt-depth-1">
+                <span
+                  className="project-badge-tag font-label-mono"
+                  style={{ borderColor: project.accentColor, color: project.accentColor }}
+                >
+                  {project.badge}
                 </span>
-              ))}
-            </div>
+                <span className="project-role-text font-label-mono">{project.role}</span>
+              </div>
 
-            {/* Action Buttons with Magnetic Physics */}
-            <div className="project-card-actions">
-              <MagneticButton>
-                <button
-                  type="button"
-                  className="btn-card-preview font-label-mono"
-                  onClick={() => openPreview(project)}
-                >
-                  <Eye size={15} />
-                  <span>View Details & UI</span>
-                </button>
-              </MagneticButton>
+              <h3 className="project-card-title font-headline-md">{project.title}</h3>
+              <p className="project-card-desc font-body-md">{project.description}</p>
 
-              <MagneticButton>
-                <a
-                  href={project.githubUrl}
-                  target="_blank"
-                  rel="noopener noreferrer"
-                  className="btn-card-github font-label-mono"
-                >
-                  <GithubIcon size={15} />
-                  <span>GitHub</span>
-                  <ArrowUpRight size={14} />
-                </a>
-              </MagneticButton>
-            </div>
-          </article>
+              {/* Concise Core Contributions */}
+              <div className="project-key-points">
+                <span className="key-points-title font-label-mono">Core Highlights:</span>
+                <ul className="key-points-list">
+                  {(project.authorOwnership || project.highlights).slice(0, 3).map((pt, i) => (
+                    <li key={i}>
+                      <CheckCircle2 size={15} className="point-icon text-cyan" />
+                      <span>{pt}</span>
+                    </li>
+                  ))}
+                </ul>
+              </div>
+
+              {/* Tech Stack Chips */}
+              <div className="project-tech-chips">
+                {project.tech.map((t) => (
+                  <span key={t} className="tech-chip font-label-mono">
+                    {t}
+                  </span>
+                ))}
+              </div>
+
+              {/* Action Buttons with Magnetic Physics */}
+              <div className="project-card-actions tilt-depth-2">
+                <MagneticButton>
+                  <button
+                    type="button"
+                    className="btn-card-preview font-label-mono"
+                    onClick={() => openPreview(project)}
+                  >
+                    <Eye size={15} />
+                    <span>View Details & UI</span>
+                  </button>
+                </MagneticButton>
+
+                <MagneticButton>
+                  <a
+                    href={project.githubUrl}
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    className="btn-card-github font-label-mono"
+                  >
+                    <GithubIcon size={15} />
+                    <span>GitHub</span>
+                    <ArrowUpRight size={14} />
+                  </a>
+                </MagneticButton>
+              </div>
+            </article>
+          </Gsap3DTilt>
         ))}
       </div>
 

@@ -2,6 +2,7 @@ import React, { useState } from 'react';
 import { Layers, ShieldCheck, Database, Layout, Sparkles, Code2, ArrowRight } from 'lucide-react';
 import { skillCategories } from '../data/skills';
 import TechMarquee from './TechMarquee';
+import Gsap3DTilt from './ui/Gsap3DTilt';
 
 export default function TechStackSection() {
   const [activeCategoryIndex, setActiveCategoryIndex] = useState(0);
@@ -50,44 +51,46 @@ export default function TechStackSection() {
       </div>
 
       {/* Dynamic Active Category Showcase */}
-      <div className="tech-active-showcase glass-panel reveal-on-scroll stagger-2">
-        <div className="active-category-header">
-          <div className="active-cat-left">
-            <div className="active-cat-icon">
-              <ActiveIcon size={24} className="text-cyan" />
-            </div>
-            <div>
-              <h3 className="active-cat-name font-headline-md">{activeCategory.category}</h3>
-              <p className="active-cat-desc font-body-sm">{activeCategory.description}</p>
-            </div>
-          </div>
-          <span className="active-cat-badge font-label-mono">{activeCategory.badge}</span>
-        </div>
-
-        {/* Compact Grid of Active Items */}
-        <div className="tech-grid-compact">
-          {activeCategory.items.map((tech, i) => (
-            <div key={i} className="tech-card-compact glass-panel interactive-hover">
-              <div className="tech-card-top">
-                <div className="tech-icon-circle">
-                  <img
-                    src={tech.icon}
-                    alt={tech.name}
-                    className="tech-icon-img"
-                    loading="lazy"
-                    onError={(e) => {
-                      e.target.style.display = 'none';
-                    }}
-                  />
-                </div>
-                <span className="tech-level-tag font-label-mono">{tech.level}</span>
+      <Gsap3DTilt maxTilt={3.5} perspective={1400} depthStrength={14} className="reveal-on-scroll stagger-2">
+        <div className="tech-active-showcase glass-panel">
+          <div className="active-category-header tilt-depth-1">
+            <div className="active-cat-left">
+              <div className="active-cat-icon">
+                <ActiveIcon size={24} className="text-cyan" />
               </div>
-              <h4 className="tech-item-name font-label-mono">{tech.name}</h4>
-              <p className="tech-item-purpose font-body-sm">{tech.purpose}</p>
+              <div>
+                <h3 className="active-cat-name font-headline-md">{activeCategory.category}</h3>
+                <p className="active-cat-desc font-body-sm">{activeCategory.description}</p>
+              </div>
             </div>
-          ))}
+            <span className="active-cat-badge font-label-mono">{activeCategory.badge}</span>
+          </div>
+
+          {/* Compact Grid of Active Items */}
+          <div className="tech-grid-compact tilt-depth-2">
+            {activeCategory.items.map((tech, i) => (
+              <div key={i} className="tech-card-compact glass-panel interactive-hover">
+                <div className="tech-card-top">
+                  <div className="tech-icon-circle">
+                    <img
+                      src={tech.icon}
+                      alt={tech.name}
+                      className="tech-icon-img"
+                      loading="lazy"
+                      onError={(e) => {
+                        e.target.style.display = 'none';
+                      }}
+                    />
+                  </div>
+                  <span className="tech-level-tag font-label-mono">{tech.level}</span>
+                </div>
+                <h4 className="tech-item-name font-label-mono">{tech.name}</h4>
+                <p className="tech-item-purpose font-body-sm">{tech.purpose}</p>
+              </div>
+            ))}
+          </div>
         </div>
-      </div>
+      </Gsap3DTilt>
 
       {/* Infinite Animated Marquee Banner for Continuous Dynamic Motion */}
       <div className="tech-marquee-wrapper">

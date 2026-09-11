@@ -3,6 +3,7 @@ import { Terminal, Play, RotateCcw, CheckCircle2, AlertCircle, Clock, ShieldChec
 import confetti from 'canvas-confetti';
 import { EncryptedText } from './ui/EncryptedText';
 import { testSuites } from '../data/testSuites';
+import Gsap3DTilt from './ui/Gsap3DTilt';
 
 export default function TestRunnerWidget() {
   const [activeSuiteId, setActiveSuiteId] = useState('cypress-e2e');
@@ -81,9 +82,10 @@ export default function TestRunnerWidget() {
         </p>
       </div>
 
-      <div className="terminal-widget glass-panel reveal-on-scroll stagger-2">
-        {/* Terminal Header */}
-        <div className="terminal-header">
+      <Gsap3DTilt maxTilt={4} perspective={1400} depthStrength={16} className="reveal-on-scroll stagger-2">
+        <div className="terminal-widget glass-panel">
+          {/* Terminal Header */}
+          <div className="terminal-header tilt-depth-1">
           <div className="terminal-dots">
             <span className="dot dot-red" />
             <span className="dot dot-yellow" />
@@ -240,7 +242,8 @@ export default function TestRunnerWidget() {
             </button>
           </div>
         </div>
-      </div>
+        </div>
+      </Gsap3DTilt>
     </section>
   );
 }

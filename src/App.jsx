@@ -29,6 +29,12 @@ import { EncryptedText } from './components/ui/EncryptedText';
 import { MagneticButton } from './components/ui/MagneticButton';
 import { NoiseBackground } from './components/ui/NoiseBackground';
 
+import gsap from 'gsap';
+import { ScrollTrigger } from 'gsap/ScrollTrigger';
+import { useGSAP } from '@gsap/react';
+
+gsap.registerPlugin(ScrollTrigger, useGSAP);
+
 export default function App() {
   const [isLightMode, setIsLightMode] = useState(() => {
     return localStorage.getItem('theme') === 'light';
@@ -85,10 +91,90 @@ export default function App() {
     return () => observer.disconnect();
   }, []);
 
+  // GSAP 3D Scroll Depth, Parallax & Micro-Physics
+  useGSAP(() => {
+    // 1. Ambient Background 3D Parallax Orbs
+    gsap.to('.gsap-parallax-orb-1', {
+      yPercent: 60,
+      xPercent: 20,
+      rotation: 60,
+      ease: 'none',
+      scrollTrigger: {
+        trigger: document.body,
+        start: 'top top',
+        end: 'bottom bottom',
+        scrub: 1.2,
+      },
+    });
+
+    gsap.to('.gsap-parallax-orb-2', {
+      yPercent: -50,
+      xPercent: -25,
+      rotation: -45,
+      ease: 'none',
+      scrollTrigger: {
+        trigger: document.body,
+        start: 'top top',
+        end: 'bottom bottom',
+        scrub: 1.5,
+      },
+    });
+
+    // 2. Hero Section 3D Floating Micro-Physics
+    gsap.to('.hero-status-pill', {
+      y: -6,
+      duration: 2.6,
+      yoyo: true,
+      repeat: -1,
+      ease: 'sine.inOut',
+    });
+
+    gsap.to('.hero-trust-bar', {
+      y: -5,
+      duration: 3.2,
+      yoyo: true,
+      repeat: -1,
+      ease: 'sine.inOut',
+      delay: 0.5,
+    });
+
+    // 3. Section Headers 3D Lift-In
+    const sectionHeaders = gsap.utils.toArray('.section-header');
+    sectionHeaders.forEach((hdr) => {
+      gsap.fromTo(
+        hdr,
+        {
+          opacity: 0,
+          y: 35,
+          rotateX: 8,
+          transformPerspective: 1000,
+          scale: 0.97,
+        },
+        {
+          opacity: 1,
+          y: 0,
+          rotateX: 0,
+          scale: 1,
+          duration: 0.8,
+          ease: 'power3.out',
+          scrollTrigger: {
+            trigger: hdr,
+            start: 'top 88%',
+            toggleActions: 'play none none none',
+          },
+        }
+      );
+    });
+  }, []);
+
   return (
     <>
       {/* Noise Texture Background */}
       <NoiseBackground opacity={isLightMode ? 0.015 : 0.03} />
+
+      {/* GSAP 3D Parallax Ambient Background Orbs */}
+      <div className="gsap-parallax-orb gsap-parallax-orb-1" aria-hidden="true" />
+      <div className="gsap-parallax-orb gsap-parallax-orb-2" aria-hidden="true" />
 
       {/* Visual Enhancers */}
       <CustomCursor />
