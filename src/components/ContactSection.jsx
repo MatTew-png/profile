@@ -1,3 +1,4 @@
+import React, { useState } from 'react';
 import { Mail, Copy, Check, Send, MapPin, Sparkles } from 'lucide-react';
 import { GithubIcon, LinkedinIcon } from './BrandIcons';
 import Gsap3DTilt from './ui/Gsap3DTilt';
